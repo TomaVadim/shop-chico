@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 
+import { Container } from "@mui/material";
+
 import { AppProvider } from "@/providers/app-provider";
 import { montserrat } from "@/assets/fonts/montserrat";
 import { roboto } from "@/assets/fonts/roboto";
+import { Header } from "@/components/header/header";
 
 import "./globals.css";
 
@@ -17,12 +20,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="uk">
+    <html lang="uk" id="__next">
       <AppProvider>
         <body
-          className={`${montserrat.variable} ${roboto.variable} font-montserrat`}
+          className={`${montserrat.variable} ${roboto.variable} font-montserrat h-full pt-[72px]`}
         >
-          {children}
+          <Header />
+          <Container component="main">{children}</Container>
         </body>
       </AppProvider>
     </html>
