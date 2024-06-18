@@ -2,6 +2,12 @@
 
 import { ReactNode } from "react";
 
-export const AppProvider = ({ children }: { children: ReactNode }) => {
-  return <>{children}</>;
+import { ThemeProvider } from "@/providers/theme-provider/theme-provider";
+
+export const AppProvider = ({
+  children,
+}: {
+  children: ReactNode;
+}): JSX.Element => {
+  return <ThemeProvider>{children}</ThemeProvider>;
 };
