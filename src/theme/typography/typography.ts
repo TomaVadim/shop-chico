@@ -6,7 +6,7 @@ export const typography: TypographyOptions = {
     fontSize: "clamp(2rem, 3vw, 2.5rem)",
   },
   h2: {
-    fontSize: "clamp(1.25rem, 2vw, 1.5rem)",
+    fontSize: "clamp(1.5rem, 2vw, 2rem)",
   },
   h3: {
     fontSize: "clamp(1rem, 2vw, 1.25rem)",
