@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
 
-import { Container } from "@mui/material";
-
 import { AppProvider } from "@/providers/app-provider";
 import { montserrat } from "@/assets/fonts/montserrat";
 import { roboto } from "@/assets/fonts/roboto";
 import { Header } from "@/components/header/header";
 
 import "./globals.css";
+import { Footer } from "@/components/footer/footer";
 
 export const metadata: Metadata = {
   title: "Chico Shop",
@@ -26,7 +25,8 @@ export default function RootLayout({
           className={`${montserrat.variable} ${roboto.variable} font-montserrat h-full pt-[72px]`}
         >
           <Header />
-          <Container component="main">{children}</Container>
+          <main>{children}</main>
+          <Footer />
         </body>
       </AppProvider>
     </html>
