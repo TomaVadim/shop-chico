@@ -13,6 +13,9 @@ const config: Config = {
   important: "#__next",
   theme: {
     extend: {
+      colors: {
+        primary: "#ffde21",
+      },
       fontFamily: {
         montserrat: ["var(--font-montserrat)"],
         roboto: ["var(--font-roboto)"],

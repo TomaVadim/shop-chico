@@ -8,8 +8,9 @@ export const CompanyLogo = (): JSX.Element => {
   return (
     <Typography
       component={Link}
-      variant="h1"
-      className="text-2xl font-bold text-white no-underline"
+      variant="h2"
+      rel="noreferrer nofollow"
+      className="text-black underline font-bold decoration-purple-500"
       href={PUBLIC_ROUTES.HOME}
     >
       Chico Shop

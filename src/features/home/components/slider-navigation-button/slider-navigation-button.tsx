@@ -14,7 +14,7 @@ export const SliderNavigationButton = ({
     <Button
       sx={{
         bgcolor: "primary.main",
-        color: "white",
+        color: "black",
         borderRadius: "50%",
 
         width: "40px",

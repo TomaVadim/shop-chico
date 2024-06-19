@@ -12,7 +12,7 @@ export const Navigation = (): JSX.Element => {
         component={Link}
         href={PUBLIC_ROUTES.PRODUCTS}
         rel="noreferrer nofollow"
-        className="text-white"
+        className="text-black"
       >
         Каталог товарів
       </Button>
