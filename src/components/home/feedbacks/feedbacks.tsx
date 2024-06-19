@@ -35,7 +35,7 @@ export const Feedbacks = ({ list }: Props): JSX.Element => {
         }}
       >
         {list.map(({ id, name, feedback }) => (
-          <SwiperSlide key={id} className="py-2 h-full">
+          <SwiperSlide key={id} className=" h-full">
             <Paper
               component="article"
               sx={{ border: "1px solid #E0E0E0" }}

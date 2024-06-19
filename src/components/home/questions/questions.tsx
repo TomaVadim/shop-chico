@@ -29,13 +29,16 @@ export const Questions = ({ list }: Props): JSX.Element => {
           onChange={handleExpand(panel)}
         >
           <AccordionSummary
+            sx={{ border: "1px solid #ffde21" }}
             expandIcon={<ExpandMoreIcon />}
             aria-controls={`${panel}-content`}
             id={panel}
           >
             <Typography variant="h2">{title}</Typography>
           </AccordionSummary>
-          <AccordionDetails>{description}</AccordionDetails>
+          <AccordionDetails sx={{ border: "1px solid #ffde21" }}>
+            {description}
+          </AccordionDetails>
         </Accordion>
       ))}
     </div>
