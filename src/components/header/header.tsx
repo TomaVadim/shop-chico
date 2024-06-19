@@ -1,4 +1,4 @@
-import { Box, Container, Paper } from "@mui/material";
+import { Box, Container } from "@mui/material";
 
 import { CompanyLogo } from "@/features/components/company-logo/company-logo";
 import { Navigation } from "@/features/header/components/navigation/navigation";
