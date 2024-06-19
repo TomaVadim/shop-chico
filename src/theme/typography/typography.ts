@@ -3,15 +3,15 @@ import { TypographyOptions } from "@mui/material/styles/createTypography";
 export const typography: TypographyOptions = {
   fontFamily: ["Montserrat", "sans-serif"].join(","),
   h1: {
-    fontSize: "1.5rem",
+    fontSize: "clamp(2rem, 3vw, 2.5rem)",
   },
   h2: {
-    fontSize: "1.25rem",
+    fontSize: "clamp(1.25rem, 2vw, 1.5rem)",
   },
   h3: {
-    fontSize: "1.125rem",
+    fontSize: "clamp(1rem, 2vw, 1.25rem)",
   },
   h4: {
-    fontSize: "1rem",
+    fontSize: "clamp(0.875rem, 2vw, 1rem)",
   },
 };
