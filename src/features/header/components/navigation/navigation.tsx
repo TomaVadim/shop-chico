@@ -10,7 +10,7 @@ export const Navigation = (): JSX.Element => {
     <Box component="nav" className="flex items-center md:gap-5">
       <Button
         component={Link}
-        href={PUBLIC_ROUTES.PRODUCTS}
+        href={`${PUBLIC_ROUTES.PRODUCTS}?gender=all&insert=without`}
         rel="noreferrer nofollow"
         className="text-black"
       >
