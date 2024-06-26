@@ -1,4 +1,4 @@
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 import { OurNewProductsSlider } from "@/features/home/components/our-new-products-slider/our-new-products-slider";
 import { OUR_NEW_PRODUCTS_LIST } from "@/features/home/constants/our-new-products-list";
