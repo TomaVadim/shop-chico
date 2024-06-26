@@ -22,10 +22,10 @@ export default function RootLayout({
     <html lang="uk" id="__next">
       <AppProvider>
         <body
-          className={`${montserrat.variable} ${roboto.variable} font-montserrat h-full pt-[72px]`}
+          className={`${montserrat.variable} ${roboto.variable} font-montserrat h-full pt-[72px] flex flex-col`}
         >
           <Header />
-          <main>{children}</main>
+          <main className="grow">{children}</main>
           <Footer />
         </body>
       </AppProvider>

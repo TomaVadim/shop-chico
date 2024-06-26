@@ -13,7 +13,7 @@ export const ShowMoreButton = ({ children }: { children: string }) => {
       variant="contained"
       className="mt-10 mx-auto"
       component={Link}
-      href={PUBLIC_ROUTES.PRODUCTS}
+      href={`${PUBLIC_ROUTES.PRODUCTS}?gender=all&insert=without`}
     >
       {children}
     </Button>
