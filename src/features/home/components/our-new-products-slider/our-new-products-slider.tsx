@@ -10,7 +10,7 @@ import { ArrowNextSlide } from "@/assets/icons/home/our-new-products/arrow-next-
 import { ArrowPrevSlide } from "@/assets/icons/home/our-new-products/arrow-prev-slide";
 import { SliderNavigationButton } from "@/features/home/components/slider-navigation-button/slider-navigation-button";
 import { OUR_NEW_PRODUCTS_BREAKPOINTS } from "@/features/home/configs/our-new-products-breakboints.config";
-import { NewProductCard } from "@/shared/enums/routes/interfaces/new-product-card";
+import { NewProductCard } from "@/shared/interfaces/new-product-card";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -61,8 +61,7 @@ export const OurNewProductsSlider = ({ list }: Props): JSX.Element => {
 
                 <Typography
                   variant="h2"
-                  color={"warning.main"}
-                  className="absolute flex items-center font-bold top-0 right-0 p-2"
+                  className="absolute flex text-blue-400 items-center font-bold top-0 right-0 p-2"
                 >
                   <TaskAltIcon className="mr-1" />
                   NEW

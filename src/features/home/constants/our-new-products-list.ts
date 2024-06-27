@@ -1,4 +1,4 @@
-import { NewProductCard } from "@/shared/enums/routes/interfaces/new-product-card";
+import { NewProductCard } from "@/shared/interfaces/new-product-card";
 import image_1 from "@/assets/images/home/our-new-products/image_1.jpeg";
 import image_2 from "@/assets/images/home/our-new-products/image_2.jpeg";
 import image_3 from "@/assets/images/home/our-new-products/image_3.jpeg";

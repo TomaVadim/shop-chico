@@ -1,4 +1,4 @@
-import { Feedback } from "@/shared/enums/routes/interfaces/feedback";
+import { Feedback } from "@/shared/interfaces/feedback";
 
 export const FEEDBACKS_LIST: Feedback[] = [
   {

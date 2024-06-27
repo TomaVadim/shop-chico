@@ -1,5 +1,5 @@
 "use client";
-import { Feedback } from "@/shared/enums/routes/interfaces/feedback";
+import { Feedback } from "@/shared/interfaces/feedback";
 import StarIcon from "@mui/icons-material/Star";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";

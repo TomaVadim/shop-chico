@@ -1,4 +1,4 @@
-import { Benefit } from "@/shared/enums/routes/interfaces/benefit";
+import { Benefit } from "@/shared/interfaces/benefit";
 
 export const BENEFITS_LIST: Benefit[] = [
   {
