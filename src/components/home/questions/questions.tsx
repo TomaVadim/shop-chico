@@ -6,7 +6,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-import { Question } from "@/shared/enums/routes/interfaces/question";
+import { Question } from "@/shared/interfaces/question";
 import { Typography } from "@mui/material";
 
 interface Props {

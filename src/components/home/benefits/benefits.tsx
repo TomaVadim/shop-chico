@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-import { Benefit } from "@/shared/enums/routes/interfaces/benefit";
+import { Benefit } from "@/shared/interfaces/benefit";
 import { BenefitCard } from "@/features/home/components/benefit-card/benefit-card";
 
 interface Props {

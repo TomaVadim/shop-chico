@@ -1,4 +1,4 @@
-import { Question } from "@/shared/enums/routes/interfaces/question";
+import { Question } from "@/shared/interfaces/question";
 
 export const QUESTIONS_LIST: Question[] = [
   {
