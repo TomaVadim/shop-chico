@@ -14,7 +14,7 @@ export const Footer = (): JSX.Element => {
 
       <Button
         component={Link}
-        href={PUBLIC_ROUTES.LOGIN}
+        href={PUBLIC_ROUTES.SIGNIN}
         className="absolute right-0 bottom-0 opacity-0 h-1/2 w-10"
       >
         b
