@@ -1,4 +1,6 @@
 "use client";
+import { INSERT } from "@/shared/enums/filter/ insert.filter";
+import { GENDER } from "@/shared/enums/filter/gender.filter";
 import {
   FormControl,
   MenuItem,
@@ -49,11 +51,11 @@ export const Filters = (): JSX.Element => {
           inputProps={{ "aria-label": "Without label" }}
           onChange={handleChangeGender}
         >
-          <MenuItem value="all">
+          <MenuItem value={GENDER.ALL}>
             <em>Всі чохли</em>
           </MenuItem>
-          <MenuItem value={"male"}>Для хлопчика</MenuItem>
-          <MenuItem value={"female"}>Для дівчинки</MenuItem>
+          <MenuItem value={GENDER.MALE}>Для хлопчика</MenuItem>
+          <MenuItem value={GENDER.FEMALE}>Для дівчинки</MenuItem>
         </Select>
       </FormControl>
 
@@ -64,10 +66,10 @@ export const Filters = (): JSX.Element => {
           inputProps={{ "aria-label": "Without label" }}
           onChange={handleChangeInsert}
         >
-          <MenuItem value="without">
+          <MenuItem value={INSERT.WITHOUT}>
             <em>Без вкладиша</em>
           </MenuItem>
-          <MenuItem value={"with"}>З вкладишем</MenuItem>
+          <MenuItem value={INSERT.WITH}>З вкладишем</MenuItem>
         </Select>
       </FormControl>
     </div>
