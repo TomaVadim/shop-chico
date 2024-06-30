@@ -35,9 +35,9 @@ export const PasswordField = ({
       helperText={errors[name]?.message}
       InputProps={{
         endAdornment: isVisiblePassword ? (
-          <Visibility onClick={handleTogglePasswordVisibility} />
-        ) : (
           <VisibilityOff onClick={handleTogglePasswordVisibility} />
+        ) : (
+          <Visibility onClick={handleTogglePasswordVisibility} />
         ),
       }}
     />
