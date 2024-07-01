@@ -1,6 +1,8 @@
-import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
-import { Box, Button } from "@mui/material";
 import Link from "next/link";
+
+import { Box, Button } from "@mui/material";
+
+import { PRIVATE_ROUTES } from "@/shared/enums/routes/private-routes";
 
 export const Footer = (): JSX.Element => {
   return (
@@ -14,7 +16,7 @@ export const Footer = (): JSX.Element => {
 
       <Button
         component={Link}
-        href={PUBLIC_ROUTES.SIGNIN}
+        href={PRIVATE_ROUTES.ADMIN}
         className="absolute right-0 bottom-0 opacity-0 h-1/2 w-10"
       >
         b
