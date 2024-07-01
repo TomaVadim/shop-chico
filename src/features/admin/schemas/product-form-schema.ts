@@ -7,8 +7,13 @@ import {
 
 export const productFormSchema = z.object({
   image: z
-    .instanceof(FileList)
+    .any()
     .nullable()
+    .refine((files) => {
+      if (!files) return true;
+      if (typeof FileList === "undefined") return true;
+      return files instanceof FileList;
+    }, "Формат файлу не підтримується")
     .refine(
       (files) =>
         !files || files.length === 0 || files[0].size <= MAX_IMAGE_SIZE,

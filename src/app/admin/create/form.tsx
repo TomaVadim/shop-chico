@@ -32,7 +32,7 @@ export const FormCreateNewProduct = (): JSX.Element => {
         control={control}
         register={register}
         errors={errors}
-        errorMessage={errors.image?.message}
+        errorMessage={errors.image?.message as string}
       />
 
       <FieldAddDescription
