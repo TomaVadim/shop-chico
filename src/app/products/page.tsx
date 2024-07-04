@@ -5,8 +5,11 @@ import { CircularProgress } from "@mui/material";
 import { Filters } from "@/components/products/filters/filters";
 import { ProductsList } from "@/components/products/products-list/products-list";
 import { SectionWrapper } from "@/features/components/section-wrapper/section-wrapper";
+import { fetchProducts } from "@/api/fetch-products";
 
-export default function Products() {
+export default async function Products() {
+  const products = await fetchProducts();
+
   return (
     <>
       <SectionWrapper>
@@ -21,7 +24,7 @@ export default function Products() {
         </Suspense>
       </SectionWrapper>
       <SectionWrapper>
-        <ProductsList />
+        <ProductsList list={products} />
       </SectionWrapper>
     </>
   );
