@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { hashPassword } from "@/utils/secure-password";
-import { connectToDB } from "@/utils/connect-to-db";
-import User from "@/schemas/user-schema";
+import { hashPassword } from "@/server/utils/secure-password";
+import { connectToDB } from "@/server/utils/connect-to-db";
+import User from "@/server/schemas/user-schema";
 
 const handler = async (req: NextRequest) => {
   try {
