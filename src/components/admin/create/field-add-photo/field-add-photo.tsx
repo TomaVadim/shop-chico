@@ -25,9 +25,9 @@ export const FieldAddPhoto = ({
     <div className="flex flex-col items-center">
       <Toaster position="top-center" toastOptions={{ id: "load-image" }} />
 
-      <Paper elevation={3} className="mb-5 w-[220px] h-[270px] overflow-hidden">
+      <Paper elevation={3} className="mb-5 w-[250px] h-[270px] overflow-hidden">
         {fileUrl && !isSubmitted ? (
-          <Image src={fileUrl} alt="image" width={220} height={270} />
+          <Image src={fileUrl} alt="image" width={250} height={270} />
         ) : (
           <div className="w-full h-full p-5 text-center flex justify-center items-center">
             <span>Завантажте фото</span>
