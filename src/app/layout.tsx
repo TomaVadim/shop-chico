@@ -7,6 +7,9 @@ import { Header } from "@/components/header/header";
 
 import "./globals.css";
 import { Footer } from "@/components/footer/footer";
+import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
+import { extractRouterConfig } from "uploadthing/server";
+import { ourFileRouter } from "./api/uploadthing/core";
 
 export const metadata: Metadata = {
   title: "Chico Shop",
@@ -25,7 +28,10 @@ export default function RootLayout({
           className={`${montserrat.variable} ${roboto.variable} font-montserrat h-full pt-[72px] flex flex-col`}
         >
           <Header />
-          <main className="grow">{children}</main>
+          <main className="grow">
+            <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)} />
+            {children}
+          </main>
           <Footer />
         </body>
       </AppProvider>
