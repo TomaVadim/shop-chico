@@ -9,12 +9,13 @@ export const FieldAddDescription = ({
   register,
 }: ProductFormFieldProps): JSX.Element => {
   return (
-    <FormControl className="flex flex-col w-full">
+    <FormControl className="flex flex-col items-center w-full">
       <label htmlFor="textarea-description" className="text-xl mb-1">
         Опис:
       </label>
       <TextField
-        fullWidth
+        multiline
+        className="w-[min(400px,100%)]"
         id="textarea-description"
         minRows={5}
         placeholder="Додати опис..."

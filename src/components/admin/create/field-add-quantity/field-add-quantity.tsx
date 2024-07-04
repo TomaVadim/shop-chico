@@ -14,6 +14,7 @@ export const FieldAddQuantity = ({
         Кількість:
       </label>
       <TextField
+        type="number"
         error={!!errors[name]}
         {...register(name)}
         helperText={errorMessage}

@@ -1,9 +1,9 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 
-import User from "@/schemas/user-schema";
-import { connectToDB } from "@/utils/connect-to-db";
-import { comparePassword } from "@/utils/secure-password";
+import User from "@/server/schemas/user-schema";
+import { connectToDB } from "@/server/utils/connect-to-db";
+import { comparePassword } from "@/server/utils/secure-password";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
 import { ExtendedUser } from "@/shared/interfaces/extended-user";
 

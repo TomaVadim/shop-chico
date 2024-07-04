@@ -1,6 +1,9 @@
 "use client";
-import { INSERT } from "@/shared/enums/filter/ insert.filter";
-import { GENDER } from "@/shared/enums/filter/gender.filter";
+
+import { usePathname, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+
 import {
   FormControl,
   MenuItem,
@@ -8,9 +11,9 @@ import {
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+
+import { INSERT } from "@/shared/enums/filter/insert.filter";
+import { GENDER } from "@/shared/enums/filter/gender.filter";
 
 export const Filters = (): JSX.Element => {
   const router = useRouter();
@@ -46,12 +49,12 @@ export const Filters = (): JSX.Element => {
       </Typography>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <Select
-          defaultValue={gender}
+          defaultValue={GENDER.UNISEX}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
           onChange={handleChangeGender}
         >
-          <MenuItem value={GENDER.ALL}>
+          <MenuItem value={GENDER.UNISEX}>
             <em>Всі чохли</em>
           </MenuItem>
           <MenuItem value={GENDER.MALE}>Для хлопчика</MenuItem>
@@ -61,7 +64,7 @@ export const Filters = (): JSX.Element => {
 
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <Select
-          defaultValue={insert}
+          defaultValue={INSERT.WITHOUT}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
           onChange={handleChangeInsert}
