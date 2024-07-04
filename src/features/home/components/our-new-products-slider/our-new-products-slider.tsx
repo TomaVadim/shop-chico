@@ -49,7 +49,7 @@ export const OurNewProductsSlider = ({ list }: Props): JSX.Element => {
           <SwiperSlide key={id} className="py-2">
             <Box className="w-full flex justify-center items-center">
               <Paper
-                className="relative top-0 left-0 h-[240px] md:w-[360px] md:h-[360px] w-[240px]"
+                className="relative top-0 left-0 h-[270px] md:w-[360px] md:h-[360px] w-[250px]"
                 sx={{ borderRadius: "6px" }}
                 elevation={3}
               >
