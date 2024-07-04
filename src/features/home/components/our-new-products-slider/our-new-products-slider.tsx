@@ -49,16 +49,19 @@ export const OurNewProductsSlider = ({ list }: Props): JSX.Element => {
           <SwiperSlide key={id} className="py-2">
             <Box className="w-full flex justify-center items-center">
               <Paper
-                className="relative top-0 left-0 h-[270px] md:w-[360px] md:h-[360px] w-[250px]"
+                className="relative top-0 left-0 w-[250px] h-[360px]"
                 sx={{ borderRadius: "6px" }}
                 elevation={3}
               >
-                <Image
-                  className="w-full h-full rounded-md object-cover"
-                  src={imageSrc}
-                  alt={alt}
-                />
-
+                <div className="relative w-full h-full overflow-hidden rounded-md">
+                  <Image
+                    src={imageSrc}
+                    alt={alt}
+                    layout="fill"
+                    objectFit="cover"
+                    sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 25vw"
+                  />
+                </div>
                 <Typography
                   variant="h2"
                   className="absolute flex text-blue-400 items-center font-bold top-0 right-0 p-2"
@@ -72,9 +75,7 @@ export const OurNewProductsSlider = ({ list }: Props): JSX.Element => {
         ))}
       </Swiper>
 
-      <div
-        className={`pagination-our-team flex gap-2 justify-center [&>.swiper-pagination-bullet-active]:bg-primary md:hidden`}
-      ></div>
+      <div className="pagination-our-team flex gap-2 justify-center md:hidden [&>.swiper-pagination-bullet-active]:bg-primary"></div>
 
       <SliderNavigationButton className="next">
         <ArrowNextSlide />

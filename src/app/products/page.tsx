@@ -12,7 +12,7 @@ export default async function Products() {
 
   return (
     <>
-      <SectionWrapper>
+      <SectionWrapper className="py-5">
         <Suspense
           fallback={
             <div className="flex justify-center items-center">
@@ -23,7 +23,7 @@ export default async function Products() {
           <Filters />
         </Suspense>
       </SectionWrapper>
-      <SectionWrapper>
+      <SectionWrapper className="py-5">
         <ProductsList list={initialProducts} />
       </SectionWrapper>
     </>
