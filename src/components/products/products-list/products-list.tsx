@@ -1,13 +1,25 @@
 import { Grid } from "@mui/material";
 
 import { ProductCard } from "../product-card/product-card";
+import { ProductData } from "@/features/products/schemas/product-data";
 
-export const ProductsList = () => {
-  const mockList = [1, 2, 3, 4, 5];
+interface Props {
+  list: ProductData[];
+}
+
+export const ProductsList = ({ list }: Props) => {
   return (
     <Grid container spacing={5}>
-      {mockList.map((_, index) => (
-        <ProductCard key={index} />
+      {list.map((data) => (
+        <ProductCard
+          description={data.description}
+          gender={data.gender}
+          imageUrl={data.imageUrl}
+          insert={data.insert}
+          price={data.price}
+          quantity={data.quantity}
+          key={data.id}
+        />
       ))}
     </Grid>
   );

@@ -14,9 +14,9 @@ interface Props {
 
 export const Feedbacks = ({ list }: Props): JSX.Element => {
   return (
-    <div className="container flex flex-col gap-5 md:flex-row items-center">
+    <div className="py-10 container flex flex-col gap-5 md:flex-row items-center">
       <Swiper
-        className="w-[88%] grid py-10"
+        className="w-[88%]"
         pagination={{
           clickable: true,
           el: ".pagination-feedbacks",

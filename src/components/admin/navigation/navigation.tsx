@@ -1,8 +1,11 @@
 "use client";
 
-import { NavigationItem } from "@/features/admin/shared/interfaces/navigation-item";
 import Link from "next/link";
+
 import { Swiper, SwiperSlide } from "swiper/react";
+
+import { NavigationItem } from "@/features/admin/shared/interfaces/navigation-item";
+import { BREAKPOINTS } from "@/components/admin/navigation/breakpoints.navigation";
 
 import "swiper/css";
 
@@ -13,7 +16,7 @@ interface Props {
 export const Navigation = ({ list }: Props): JSX.Element => {
   return (
     <Swiper
-      slidesPerView={3}
+      breakpoints={BREAKPOINTS}
       className="admin-navigation-container py-5 bg-slate-200"
     >
       {list.map(({ href, page, id }) => (
