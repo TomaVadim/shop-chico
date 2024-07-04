@@ -1,5 +1,3 @@
-import axios from "axios";
-
 import {
   ProductData,
   productSchema,
@@ -7,10 +5,11 @@ import {
 
 export const fetchProducts = async (): Promise<ProductData[] | []> => {
   try {
-    const response = await axios.get(
-      `${process.env.NEXT_PUBLIC_BASE_URL}/api/product`
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/product`,
+      { cache: "no-store" }
     );
-    const data = response.data;
+    const data = await response.json();
 
     const parsedData = productSchema.array().safeParse(data);
 

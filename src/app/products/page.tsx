@@ -8,7 +8,7 @@ import { SectionWrapper } from "@/features/components/section-wrapper/section-wr
 import { fetchProducts } from "@/api/fetch-products";
 
 export default async function Products() {
-  const products = await fetchProducts();
+  const initialProducts = await fetchProducts();
 
   return (
     <>
@@ -24,7 +24,7 @@ export default async function Products() {
         </Suspense>
       </SectionWrapper>
       <SectionWrapper>
-        <ProductsList list={products} />
+        <ProductsList list={initialProducts} />
       </SectionWrapper>
     </>
   );
