@@ -7,7 +7,7 @@ import { Counter } from "@/server/schemas/counter";
 export const GET = async (
   _: NextRequest,
   { params }: { params: { id: string } }
-) => {
+): Promise<NextResponse> => {
   try {
     await connectToDB();
 
@@ -29,7 +29,7 @@ export const GET = async (
 export const PUT = async (
   req: NextRequest,
   { params }: { params: { id: string } }
-) => {
+): Promise<NextResponse> => {
   const body = await req.json();
 
   try {
@@ -53,7 +53,7 @@ export const PUT = async (
 export const DELETE = async (
   _: NextRequest,
   { params }: { params: { id: string } }
-) => {
+): Promise<NextResponse> => {
   try {
     await connectToDB();
 
