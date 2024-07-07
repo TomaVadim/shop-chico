@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 const GenderEnum = z.enum(["male", "female", "unisex"]);
-const InsertEnum = z.enum(["with", "without", "all"]);
+const InsertEnum = z.enum(["with", "without"]);
 
 export const productSchema = z.object({
   id: z.number(),
