@@ -12,6 +12,7 @@ export const ProductsList = ({ list }: Props) => {
     <Grid container spacing={5}>
       {list.map((data) => (
         <ProductCard
+          id={data.id}
           description={data.description}
           gender={data.gender}
           imageUrl={data.imageUrl}

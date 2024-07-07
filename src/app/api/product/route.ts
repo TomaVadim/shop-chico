@@ -4,7 +4,7 @@ import { connectToDB } from "@/server/utils/connect-to-db";
 import { Product } from "@/schemas/product-schema";
 import { productFormSchema } from "@/features/admin/schemas/product-form-schema";
 
-export async function POST(req: NextRequest) {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   const body = await req.json();
 
   const parsedBody = productFormSchema.safeParse(body);
@@ -37,7 +37,7 @@ export async function POST(req: NextRequest) {
   }
 }
 
-export const GET = async (req: NextRequest) => {
+export const GET = async (req: NextRequest): Promise<NextResponse> => {
   try {
     await connectToDB();
 
