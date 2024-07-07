@@ -57,8 +57,8 @@ export const OurNewProductsSlider = ({ list }: Props): JSX.Element => {
                   <Image
                     src={imageSrc}
                     alt={alt}
-                    layout="fill"
-                    objectFit="cover"
+                    fill
+                    className="w-full h-full object-cover"
                     sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 25vw"
                   />
                 </div>
