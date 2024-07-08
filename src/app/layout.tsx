@@ -10,6 +10,7 @@ import { Footer } from "@/components/footer/footer";
 import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "./api/uploadthing/core";
+import { ModalCookieUsage } from "@/features/components/modal-cookie-usage/modal-cookie-usage";
 
 export const metadata: Metadata = {
   title: "Chico Shop",
@@ -33,6 +34,8 @@ export default function RootLayout({
             {children}
           </main>
           <Footer />
+
+          <ModalCookieUsage />
         </body>
       </AppProvider>
     </html>
