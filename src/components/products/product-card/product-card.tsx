@@ -3,19 +3,23 @@
 import Link from "next/link";
 import Image from "next/image";
 
+import { useSession } from "next-auth/react";
 import { Button, Grid, Paper, Typography } from "@mui/material";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { translateInsert } from "@/features/products/utils/translate-insert";
 import { translateGender } from "@/features/products/utils/translate-gender";
-import { useSession } from "next-auth/react";
 import { PRIVATE_ROUTES } from "@/shared/enums/routes/private-routes";
+import { useCartStore } from "@/stores/zustand/use-cart-store";
+import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
+import { ProductData } from "@/features/products/schemas/product-data";
 
 interface Props {
   id: number;
   description: string;
-  gender: string;
+  gender: "male" | "female" | "unisex";
   imageUrl: string;
-  insert: string;
+  insert: "with" | "without";
   price: number;
   quantity: number;
 }
@@ -26,9 +30,27 @@ export const ProductCard = ({
   imageUrl,
   insert,
   price,
+  description,
   quantity,
 }: Props): JSX.Element => {
   const { data: session } = useSession();
+  const { addItem } = useCartStore();
+  const { increment } = useCartQuantity();
+
+  const PRODUCT = {
+    id,
+    quantity,
+    gender,
+    insert,
+    imageUrl,
+    price,
+    description,
+  };
+
+  const handleAddToCart = (product: ProductData) => {
+    increment();
+    addItem(product);
+  };
 
   const translatedGender = translateGender(gender);
   const translatedInsert = translateInsert(insert);
@@ -86,8 +108,14 @@ export const ProductCard = ({
           )}
 
           <div className="py-6 flex justify-between items-center">
-            <Button variant="outlined" color="secondary" className="text-sm">
-              В корзину
+            <Button
+              endIcon={<ShoppingCartIcon />}
+              variant="outlined"
+              color="secondary"
+              className="text-sm"
+              onClick={() => handleAddToCart(PRODUCT)}
+            >
+              В кошик
             </Button>
 
             <Link href={""} className="text-sm text-black">
