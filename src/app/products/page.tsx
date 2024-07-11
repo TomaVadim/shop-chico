@@ -24,7 +24,7 @@ export default async function Products() {
         </Suspense>
       </SectionWrapper>
       <SectionWrapper className="py-5">
-        <ProductsList list={initialProducts} />
+        <ProductsList listOfProducts={initialProducts} />
       </SectionWrapper>
     </>
   );
