@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 
 import { ProductsCart } from "@/components/cart/products-cart/products-cart";
 import { SectionWrapper } from "@/features/components/section-wrapper/section-wrapper";
@@ -20,9 +20,9 @@ export default function CartLayout({
         <ShowMoreButton>Продовжити покупки</ShowMoreButton>
       </SectionWrapper>
 
-      <SectionWrapper className="py-0">
+      <Container maxWidth="lg" className="pb-10">
         <ProductsCart />
-      </SectionWrapper>
+      </Container>
 
       <ButtonMoveToCheckout />
       {children}
