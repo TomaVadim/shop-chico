@@ -16,7 +16,7 @@ import {
 
 import toast, { Toaster } from "react-hot-toast";
 
-import { fetchDeleteProductById } from "@/api/fetch-delete-product-by-id";
+import { deleteProductById } from "@/api/delete-product-by-id";
 import { useValidateProductFormData } from "@/features/admin/hooks/use-validate-product-form-data";
 import { ProductFormData } from "@/features/admin/shared/types/product-form-data";
 import { ProductData } from "@/features/products/schemas/product-data";
@@ -24,9 +24,10 @@ import { UploadButton } from "@/server/utils/uploadthing";
 import { GENDER } from "@/shared/enums/filter/gender.filter";
 import { INSERT } from "@/shared/enums/filter/insert.filter";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
-import { fetchUpdateProductById } from "@/api/fetch-update-product";
+import { updateProductById } from "@/api/update-product-by-id";
 import { useToggleState } from "@/hooks/use-toggle-state";
 import { DeleteModal } from "@/components/admin/update/delete-modal/delete-modal";
+import { deleteImageFromUploadthingByKey } from "@/api/delete-image-from-uploadthing-by-key";
 
 interface Props {
   data: ProductData;
@@ -39,9 +40,13 @@ export const EditForm = ({ data }: Props): JSX.Element => {
 
   const handleDeleteProduct = async (id: number) => {
     try {
-      const response = await fetchDeleteProductById(id);
+      const response = await deleteProductById(id).then(async (res) => {
+        const resData = await deleteImageFromUploadthingByKey(res.data.fileKey);
 
-      if (response) {
+        return resData;
+      });
+
+      if (response.status === 200) {
         router.push(PUBLIC_ROUTES.HOME);
       }
     } catch (error) {
@@ -57,18 +62,30 @@ export const EditForm = ({ data }: Props): JSX.Element => {
     formState: { errors, isSubmitted },
     register,
     handleSubmit,
-  } = useValidateProductFormData({
-    ...data,
-    price: data.price.toString(),
-    quantity: data.quantity.toString(),
-  });
+  } = useValidateProductFormData(data);
 
-  const handleOnSubmit = (formData: ProductFormData) => {
-    fetchUpdateProductById({
+  const handleOnSubmit = async (formData: ProductFormData) => {
+    if (data.imageUrl !== fileUrl) {
+      await deleteImageFromUploadthingByKey(data?.fileKey);
+    }
+
+    const response = await updateProductById({
       id: data.id,
       formData,
       fileUrl,
     });
+
+    if (response.status === 201) {
+      toast.success("Товар оновлено", {
+        position: "top-center",
+        id: "update-product",
+      });
+    } else {
+      toast.error("Щось пішло не так", {
+        position: "top-center",
+        id: "update-product",
+      });
+    }
   };
 
   return (
@@ -178,10 +195,10 @@ export const EditForm = ({ data }: Props): JSX.Element => {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem value={GENDER.UNISEX}>
-            <em>Унісекс</em>
+            <em>{GENDER.UNISEX}</em>
           </MenuItem>
-          <MenuItem value={GENDER.MALE}>Для хлопчика</MenuItem>
-          <MenuItem value={GENDER.FEMALE}>Для дівчинки</MenuItem>
+          <MenuItem value={GENDER.MALE}>{GENDER.MALE}</MenuItem>
+          <MenuItem value={GENDER.FEMALE}>{GENDER.FEMALE}</MenuItem>
         </Select>
         {errors.gender && (
           <FormHelperText error>{errors.gender?.message}</FormHelperText>
@@ -198,9 +215,9 @@ export const EditForm = ({ data }: Props): JSX.Element => {
           inputProps={{ "aria-label": "Without label" }}
         >
           <MenuItem value={INSERT.WITHOUT}>
-            <em>Без вкладишу</em>
+            <em>{INSERT.WITHOUT}</em>
           </MenuItem>
-          <MenuItem value={INSERT.WITH}>З вкладишем</MenuItem>
+          <MenuItem value={INSERT.WITH}>{INSERT.WITH}</MenuItem>
         </Select>
         {errors.insert && (
           <FormHelperText error>{errors.insert?.message}</FormHelperText>
