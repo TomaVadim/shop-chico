@@ -3,6 +3,7 @@ import { useState } from "react";
 
 import { Button, FormControl } from "@mui/material";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 import { FieldAddDescription } from "@/components/admin/create/field-add-description/field-add-description";
 import { FieldAddPhoto } from "@/components/admin/create/field-add-photo/field-add-photo";
@@ -12,23 +13,26 @@ import { useValidateProductFormData } from "@/features/admin/hooks/use-validate-
 import { ProductFormData } from "@/features/admin/shared/types/product-form-data";
 import { SelectChoseGender } from "@/components/admin/create/select-chose-gender/select-chose-gender";
 import { SelectChoseInsert } from "@/components/admin/create/select-chose-insert/select-chose-insert";
-import toast, { Toaster } from "react-hot-toast";
 
 export const FormCreateNewProduct = (): JSX.Element => {
   const [fileUrl, setFileUrl] = useState("");
 
-  const handleLoadFile = (url: string) => {
+  const handleLoadFile = (url: string, key: string) => {
     setFileUrl(url);
+    setValue("imageUrl", url);
+    setValue("fileKey", key);
   };
 
   const {
     formState: { errors, isSubmitSuccessful },
     handleSubmit,
     register,
+    setValue,
     reset,
   } = useValidateProductFormData();
 
   const handleOnSubmit = async (data: ProductFormData) => {
+    console.log(data);
     try {
       const response = await axios(
         `${process.env.NEXT_PUBLIC_BASE_URL!}/api/product`,
@@ -77,6 +81,17 @@ export const FormCreateNewProduct = (): JSX.Element => {
         handleLoadFile={handleLoadFile}
         fileUrl={fileUrl}
       />
+
+      <input
+        type="text"
+        className="opacity-0 w-0 h-0"
+        {...register("fileKey")}
+        readOnly
+      />
+
+      {errors["fileKey"] && (
+        <p className="text-red-500">{errors["fileKey"]?.message}</p>
+      )}
 
       <FieldAddDescription
         name="description"
