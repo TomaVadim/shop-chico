@@ -8,7 +8,7 @@ import { UploadButton } from "@/server/utils/uploadthing";
 import { ProductFormFieldProps } from "@/features/admin/shared/interfaces/product-form-field-props";
 
 interface Props extends ProductFormFieldProps {
-  handleLoadFile: (url: string) => void;
+  handleLoadFile: (url: string, key: string) => void;
   fileUrl: string;
   isSubmitted: boolean;
 }
@@ -39,9 +39,10 @@ export const FieldAddPhoto = ({
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
           const url = res[0].url;
+          const key = res[0].key;
 
           if (url) {
-            handleLoadFile(url);
+            handleLoadFile(url, key);
           }
 
           toast.success("Фото успішно завантажено", {
@@ -60,7 +61,8 @@ export const FieldAddPhoto = ({
         type="text"
         className="opacity-0 w-0 h-0"
         {...register(name)}
-        value={fileUrl || ""}
+        readOnly
+        // value={fileUrl || ""}
       />
 
       {errors[name] && <p className="text-red-500">{errors[name]?.message}</p>}
