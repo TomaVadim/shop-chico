@@ -5,11 +5,17 @@ import {
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
-export const fetchProducts = async (): Promise<ProductData[] | []> => {
+export const fetchProducts = async (
+  page: number = 1,
+  limit: number = 10
+): Promise<ProductData[] | []> => {
   try {
-    const response = await fetch(`${BASE_URL}/api/product`, {
-      cache: "no-store",
-    });
+    const response = await fetch(
+      `${BASE_URL}/api/product?page=${page}&limit=${limit}`,
+      {
+        cache: "no-store",
+      }
+    );
     const data = await response.json();
 
     const parsedData = productSchema.array().safeParse(data);
