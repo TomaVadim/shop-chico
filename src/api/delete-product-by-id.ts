@@ -1,8 +1,6 @@
 import toast from "react-hot-toast";
 
-import { ReturnedData } from "@/shared/interfaces/returned-data";
-
-export const deleteProductById = async (id: number): Promise<ReturnedData> => {
+export const deleteProductById = async (id: number) => {
   try {
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_URL}/api/product/${id}`,
