@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { Product } from "@/schemas/product-schema";
+import { Product } from "@/server/schemas/product-schema";
 import { connectToDB } from "@/server/utils/connect-to-db";
 import { Counter } from "@/server/schemas/counter";
+import { ProductData } from "@/features/products/schemas/product-data";
 
 export const GET = async (
   _: NextRequest,
@@ -14,15 +15,12 @@ export const GET = async (
     const product = await Product.findOne({ id: Number(params.id) });
 
     if (!product) {
-      return NextResponse.json({ error: "Product not found" }, { status: 404 });
+      return NextResponse.json({ error: "Product not found", status: 404 });
     }
 
-    return NextResponse.json(product);
+    return NextResponse.json({ data: product, status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Failed to get product" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Failed to get product", status: 500 });
   }
 };
 
@@ -41,7 +39,7 @@ export const PUT = async (
       { new: true }
     );
 
-    return NextResponse.json({ data: updatedProduct }, { status: 200 });
+    return NextResponse.json({ data: updatedProduct, status: 201 });
   } catch (error) {
     return NextResponse.json(
       { error: "Failed to update product" },
@@ -53,7 +51,7 @@ export const PUT = async (
 export const DELETE = async (
   _: NextRequest,
   { params }: { params: { id: string } }
-): Promise<NextResponse> => {
+): Promise<NextResponse<ProductData> | NextResponse> => {
   try {
     await connectToDB();
 
@@ -67,10 +65,18 @@ export const DELETE = async (
         { status: 400 }
       );
     }
+    const remainingProducts = await Product.find().sort({ id: 1 });
+
+    await Promise.all(
+      remainingProducts.map((product, index) => {
+        product.id = index + 1;
+        return product.save();
+      })
+    );
 
     await Counter.findByIdAndUpdate(
       { _id: "products" },
-      { $inc: { sequence_value: -1 } }
+      { sequence_value: remainingProducts.length }
     );
 
     return NextResponse.json({ data: deletedProduct }, { status: 200 });
