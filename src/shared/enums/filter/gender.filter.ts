@@ -1,5 +1,5 @@
 export const enum GENDER {
-  MALE = "male",
-  FEMALE = "female",
-  UNISEX = "unisex",
+  MALE = "Для хлопчика",
+  FEMALE = "Для дівчинки",
+  UNISEX = "Унісекс",
 }

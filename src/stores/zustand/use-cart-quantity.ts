@@ -17,6 +17,7 @@ interface CartQuantityState {
   increment: () => void;
   decrement: () => void;
   setQuantity: (quantity: number) => void;
+  clearQuantity: () => void;
 }
 
 export const useCartQuantity = create<CartQuantityState>((set) => ({
@@ -34,4 +35,9 @@ export const useCartQuantity = create<CartQuantityState>((set) => ({
       return { quantity: newQuantity };
     }),
   setQuantity: (quantity) => set({ quantity }),
+  clearQuantity: () =>
+    set((state) => {
+      saveQuantityToLocalStorage(0);
+      return { quantity: 0 };
+    }),
 }));

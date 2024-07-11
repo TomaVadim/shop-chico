@@ -1,4 +1,4 @@
 export const enum INSERT {
-  WITH = "with",
-  WITHOUT = "without",
+  WITH = "З вставкою",
+  WITHOUT = "Без вставки",
 }
