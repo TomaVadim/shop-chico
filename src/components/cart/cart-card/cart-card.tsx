@@ -5,8 +5,6 @@ import { useEffect, useState } from "react";
 import { Button, Paper, Typography } from "@mui/material";
 
 import { ProductData } from "@/features/products/schemas/product-data";
-import { translateGender } from "@/features/products/utils/translate-gender";
-import { translateInsert } from "@/features/products/utils/translate-insert";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { fetchProductById } from "@/api/fetch-product-by-id";
@@ -17,10 +15,11 @@ interface Props {
 
 export const CartCard = ({ product }: Props): JSX.Element => {
   const [dbproductQuantity, setDbproductQuantity] = useState<number>(1);
-  const id = product.id.toString();
 
   useEffect(() => {
-    fetchProductById(id).then((res) => setDbproductQuantity(res.quantity));
+    fetchProductById(product.id).then((res) =>
+      setDbproductQuantity(res.data.quantity)
+    );
   }, []);
 
   const { increment, decrement } = useCartQuantity();
@@ -62,12 +61,12 @@ export const CartCard = ({ product }: Props): JSX.Element => {
         <div className="mt-4 lg:mt-0 flex flex-col gap-2">
           <Typography component="h3" variant="h4">
             Стать:
-            <b className="ml-2">{translateGender(product.gender)}</b>
+            <b className="ml-2">{product.gender}</b>
           </Typography>
 
           <Typography component="h3" variant="h4">
             Вставка:
-            <b className="ml-2">{translateInsert(product.insert)}</b>
+            <b className="ml-2">{product.insert}</b>
           </Typography>
 
           <Typography component="h3" variant="h4">
@@ -78,12 +77,6 @@ export const CartCard = ({ product }: Props): JSX.Element => {
       </div>
 
       <div className="mt-4 lg:mt-0 flex flex-col justify-around items-center">
-        <span className="text-lg place-items-end">
-          Вартість:
-          <b className="mx-2">{product.price * product.quantity}</b>
-          грн
-        </span>
-
         <div className="mt-4 lg:mt-0 flex gap-2 items-center">
           <Button
             variant="contained"

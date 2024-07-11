@@ -16,9 +16,9 @@ export const ButtonMoveToCheckout = (): JSX.Element => {
   return (
     <Container className="pb-10 flex justify-center" maxWidth="lg">
       <Button
+        fullWidth
         component={Link}
         href={`${PUBLIC_ROUTES.CART}${PUBLIC_ROUTES.CHECKOUT}`}
-        color="warning"
         size="large"
         variant="contained"
       >

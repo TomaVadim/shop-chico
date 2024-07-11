@@ -1,6 +1,6 @@
 import { Schema, model, models } from "mongoose";
 
-import { getNextSequence } from "@/server/utils/get-next-sequence"; // Adjust the import path accordingly
+import { getNextSequence } from "@/server/utils/get-next-sequence";
 
 export const ProductSchema = new Schema({
   id: {
@@ -10,12 +10,13 @@ export const ProductSchema = new Schema({
 
   insert: {
     type: String,
-    enum: ["with", "without"],
+    enum: ["З вставкою", "Без вставки"],
     required: true,
   },
+
   gender: {
     type: String,
-    enum: ["male", "female", "unisex"],
+    enum: ["Для хлопчика", "Для дівчинки", "Унісекс"],
     required: true,
   },
 
@@ -38,6 +39,10 @@ export const ProductSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  fileKey: {
+    type: String,
+    required: true,
   },
   reserved: {
     type: Boolean,

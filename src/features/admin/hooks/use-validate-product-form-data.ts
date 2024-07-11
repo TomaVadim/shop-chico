@@ -12,9 +12,10 @@ export const useValidateProductFormData = (defaultData?: ProductFormData) =>
     defaultValues: {
       insert: defaultData?.insert || INSERT.WITHOUT,
       gender: defaultData?.gender || GENDER.UNISEX,
-      imageUrl: defaultData?.imageUrl || "",
-      description: defaultData?.description || "",
-      price: defaultData?.price || "",
-      quantity: defaultData?.quantity || "",
+      imageUrl: defaultData?.imageUrl,
+      description: defaultData?.description,
+      price: defaultData?.price,
+      quantity: defaultData?.quantity,
+      fileKey: defaultData?.fileKey,
     },
   });

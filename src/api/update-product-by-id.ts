@@ -1,5 +1,3 @@
-import toast from "react-hot-toast";
-
 import { ProductFormData } from "@/features/admin/shared/types/product-form-data";
 import { BASE_URL } from "@/api/base-url";
 
@@ -9,11 +7,7 @@ interface Props {
   fileUrl: string;
 }
 
-export const fetchUpdateProductById = async ({
-  id,
-  formData,
-  fileUrl,
-}: Props) => {
+export const updateProductById = async ({ id, formData, fileUrl }: Props) => {
   try {
     const response = await fetch(`${BASE_URL}/api/product/${id}`, {
       headers: {
@@ -23,18 +17,11 @@ export const fetchUpdateProductById = async ({
       method: "PUT",
     });
 
-    if (response.status !== 200) return;
+    const data = await response.json();
 
-    toast.success("Товар оновлено", {
-      position: "top-center",
-      id: "edit-product",
-    });
-
-    return response;
+    return data;
   } catch (error) {
-    toast.error("Щось пішло не так", {
-      position: "top-center",
-      id: "edit-product",
-    });
+    console.error("Error updating product:", error);
+    throw new Error("Failed to update product", { cause: error });
   }
 };

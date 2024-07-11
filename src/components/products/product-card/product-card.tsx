@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 
 import { useSession } from "next-auth/react";
 import { Button, Grid, Paper, Typography } from "@mui/material";
@@ -13,47 +14,37 @@ import { PRIVATE_ROUTES } from "@/shared/enums/routes/private-routes";
 import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { ProductData } from "@/features/products/schemas/product-data";
+import { fetchProductById } from "@/api/fetch-product-by-id";
 
 interface Props {
-  id: number;
-  description: string;
-  gender: "male" | "female" | "unisex";
-  imageUrl: string;
-  insert: "with" | "without";
-  price: number;
-  quantity: number;
+  product: ProductData;
 }
 
-export const ProductCard = ({
-  id,
-  gender,
-  imageUrl,
-  insert,
-  price,
-  description,
-  quantity,
-}: Props): JSX.Element => {
+export const ProductCard = ({ product }: Props): JSX.Element => {
+  const [dbproductQuantity, setDbproductQuantity] = useState<number>(1);
+
+  useEffect(() => {
+    fetchProductById(product.id).then((res) =>
+      setDbproductQuantity(res.data.quantity)
+    );
+  }, []);
+
   const { data: session } = useSession();
-  const { addItem } = useCartStore();
+  const { items, addItem } = useCartStore();
   const { increment } = useCartQuantity();
 
-  const PRODUCT = {
-    id,
-    quantity,
-    gender,
-    insert,
-    imageUrl,
-    price,
-    description,
-  };
-
   const handleAddToCart = (product: ProductData) => {
+    if (product.quantity === 0) return;
+
+    const productInCart = items.find(
+      (item) => item.imageUrl === product.imageUrl
+    );
+
+    if (productInCart?.quantity === dbproductQuantity) return;
+
     increment();
     addItem(product);
   };
-
-  const translatedGender = translateGender(gender);
-  const translatedInsert = translateInsert(insert);
 
   return (
     <Grid item xs={12} sm={6} md={3}>
@@ -61,7 +52,7 @@ export const ProductCard = ({
         <div className="relative w-full h-64 overflow-hidden">
           <Image
             priority
-            src={imageUrl}
+            src={product.imageUrl}
             fill
             alt="Фото чохла"
             className="w-full h-full object-contain"
@@ -72,33 +63,33 @@ export const ProductCard = ({
         <div className="px-5 flex flex-col">
           <div className="mt-6 flex justify-between items-center">
             <Typography className="text-sm">
-              Ціна: <span className="pl-1 font-bold">{price}</span>
+              Ціна: <span className="pl-1 font-bold">{product.price}</span>
             </Typography>
 
             <Typography className="text-sm">
               Кількість:
               <span
                 className={`font-bold pl-1 ${
-                  quantity <= 0 ? "text-red-500" : ""
+                  product.quantity <= 0 ? "text-red-500" : ""
                 }`}
               >
-                {quantity}
+                {product.quantity}
               </span>
             </Typography>
           </div>
 
           <Typography className="text-sm mt-3">
-            Стать: <span className="pl-1 font-bold">{translatedGender}</span>
+            Стать: <span className="pl-1 font-bold">{product.gender}</span>
           </Typography>
 
           <Typography className="text-sm mt-3">
-            Вставка: <span className="pl-1 font-bold">{translatedInsert}</span>
+            Вставка: <span className="pl-1 font-bold">{product.insert}</span>
           </Typography>
 
           {session?.user.role === "admin" && (
             <Button
               component={Link}
-              href={`${PRIVATE_ROUTES.EDIT}/${id}`}
+              href={`${PRIVATE_ROUTES.EDIT}/${product.id}`}
               variant="contained"
               color="warning"
               className="mt-6 text-sm"
@@ -113,7 +104,7 @@ export const ProductCard = ({
               variant="outlined"
               color="secondary"
               className="text-sm"
-              onClick={() => handleAddToCart(PRODUCT)}
+              onClick={() => handleAddToCart(product)}
             >
               В кошик
             </Button>

@@ -29,6 +29,8 @@ export const useCartStore = create<CartState>((set) => ({
   initialized: false,
   addItem: (item) =>
     set((state) => {
+      if (item.quantity === 0) return { items: state.items };
+
       const existingItem = state.items.find((i) => i.id === item.id);
       const newItems = existingItem
         ? state.items.map((i) =>
@@ -73,6 +75,7 @@ export const useInitializeCart = () => {
   const setItems = useCartStore((state) => state.setItems);
   const setInitialized = useCartStore((state) => state.setInitialized);
   const initialized = useCartStore((state) => state.initialized);
+  const clearCart = useCartStore((state) => state.clearCart);
 
   useEffect(() => {
     if (!initialized) {
@@ -80,5 +83,5 @@ export const useInitializeCart = () => {
       setItems(items);
       setInitialized();
     }
-  }, [initialized, setItems, setInitialized]);
+  }, [initialized, setItems, setInitialized, clearCart]);
 };

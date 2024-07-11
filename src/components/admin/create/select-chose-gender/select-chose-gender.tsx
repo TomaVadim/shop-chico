@@ -20,10 +20,10 @@ export const SelectChoseGender = ({
         inputProps={{ "aria-label": "Without label" }}
       >
         <MenuItem value={GENDER.UNISEX}>
-          <em>Унісекс</em>
+          <em>{GENDER.UNISEX}</em>
         </MenuItem>
-        <MenuItem value={GENDER.MALE}>Для хлопчика</MenuItem>
-        <MenuItem value={GENDER.FEMALE}>Для дівчинки</MenuItem>
+        <MenuItem value={GENDER.MALE}>{GENDER.MALE}</MenuItem>
+        <MenuItem value={GENDER.FEMALE}>{GENDER.FEMALE}</MenuItem>
       </Select>
       {errors[name] && <FormHelperText error>{errorMessage}</FormHelperText>}
     </FormControl>

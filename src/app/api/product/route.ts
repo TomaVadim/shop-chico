@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { connectToDB } from "@/server/utils/connect-to-db";
-import { Product } from "@/schemas/product-schema";
+import { Product } from "@/server/schemas/product-schema";
 import { productFormSchema } from "@/features/admin/schemas/product-form-schema";
 
 export async function POST(req: NextRequest): Promise<NextResponse> {

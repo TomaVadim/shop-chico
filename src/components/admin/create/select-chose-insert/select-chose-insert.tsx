@@ -20,9 +20,9 @@ export const SelectChoseInsert = ({
         inputProps={{ "aria-label": "Without label" }}
       >
         <MenuItem value={INSERT.WITHOUT}>
-          <em>Без вкладишу</em>
+          <em>{INSERT.WITHOUT}</em>
         </MenuItem>
-        <MenuItem value={INSERT.WITH}>З вкладишем</MenuItem>
+        <MenuItem value={INSERT.WITH}>{INSERT.WITH}</MenuItem>
       </Select>
       {errors[name] && <FormHelperText error>{errorMessage}</FormHelperText>}
     </FormControl>
