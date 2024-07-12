@@ -21,7 +21,7 @@ export const checkoutFormSchema = z.object({
   payment: z.string().min(1, "Поле не повинно бути порожнім"),
   delivery: z.string().min(1, "Поле не повинно бути порожнім"),
   comment: z.string().optional(),
-  cart: z.array(productSchema).optional(),
+  cart: z.array(productSchema),
 });
 
 export type CheckoutFormData = z.infer<typeof checkoutFormSchema>;
