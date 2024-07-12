@@ -21,16 +21,6 @@ export const ProductsList = ({ listOfProducts }: Props) => {
     setPage(value);
   };
 
-  useEffect(() => {
-    const getCurrentPageData = async () => {
-      const response = await fetchProducts(page);
-
-      setCurrentPageData(response);
-    };
-
-    getCurrentPageData();
-  }, [page]);
-
   return (
     <>
       <Grid container spacing={5}>
