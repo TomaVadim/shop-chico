@@ -8,13 +8,12 @@ import { useSession } from "next-auth/react";
 import { Button, Grid, Paper, Typography } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import { translateInsert } from "@/features/products/utils/translate-insert";
-import { translateGender } from "@/features/products/utils/translate-gender";
 import { PRIVATE_ROUTES } from "@/shared/enums/routes/private-routes";
 import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { ProductData } from "@/features/products/schemas/product-data";
 import { fetchProductById } from "@/api/fetch-product-by-id";
+import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
 
 interface Props {
   product: ProductData;
@@ -109,7 +108,10 @@ export const ProductCard = ({ product }: Props): JSX.Element => {
               В кошик
             </Button>
 
-            <Link href={""} className="text-sm text-black">
+            <Link
+              href={`${PUBLIC_ROUTES.PRODUCTS}/${product.id}`}
+              className="text-sm text-black"
+            >
               Детальніше
             </Link>
           </div>
