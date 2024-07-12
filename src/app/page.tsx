@@ -1,7 +1,6 @@
 import { Container, Typography } from "@mui/material";
 
-import { OurNewProductsSlider } from "@/features/home/components/our-new-products-slider/our-new-products-slider";
-import { OUR_NEW_PRODUCTS_LIST } from "@/features/home/constants/our-new-products-list";
+import { OurNewProductsSlider } from "@/components/home/our-new-products-slider/our-new-products-slider";
 import { SectionTitle } from "@/features/components/section-title/section-title";
 import { SectionWrapper } from "@/features/components/section-wrapper/section-wrapper";
 import { Benefits } from "@/components/home/benefits/benefits";
@@ -37,7 +36,7 @@ export default function Home() {
       <SectionWrapper>
         <SectionTitle>Новинки</SectionTitle>
 
-        <OurNewProductsSlider list={OUR_NEW_PRODUCTS_LIST} />
+        <OurNewProductsSlider />
       </SectionWrapper>
 
       <SectionWrapper>
