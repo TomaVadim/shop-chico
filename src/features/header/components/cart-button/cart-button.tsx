@@ -1,24 +1,15 @@
 "use client";
 import Link from "next/link";
-import { useEffect } from "react";
 
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 import { StyledCartButton } from "@/features/header/components/cart-button/styled-cart-button";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
-import {
-  loadQuantityFromLocalStorage,
-  useCartQuantity,
-} from "@/stores/zustand/use-cart-quantity";
+import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 
 export const CartButton = (): JSX.Element => {
-  const { quantity, setQuantity } = useCartQuantity();
-
-  useEffect(() => {
-    const initialQuantity = loadQuantityFromLocalStorage();
-    setQuantity(initialQuantity);
-  }, [setQuantity]);
+  const { quantity } = useCartQuantity();
 
   return (
     <IconButton

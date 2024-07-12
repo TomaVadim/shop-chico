@@ -1,12 +1,11 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography } from "@mui/material";
 
 import { ProductCard } from "@/components/products/product-card/product-card";
 import { ProductData } from "@/features/products/schemas/product-data";
 import { Pagination } from "@/components/products/pagination/pagination";
-import { fetchProducts } from "@/api/fetch-products";
 
 interface Props {
   listOfProducts: ProductData[];
@@ -20,6 +19,14 @@ export const ProductsList = ({ listOfProducts }: Props) => {
   const handlePageChange = async (value: number) => {
     setPage(value);
   };
+
+  if (!currentPageData.length) {
+    return (
+      <Typography variant="h5" textAlign="center">
+        Нічого не знайдено
+      </Typography>
+    );
+  }
 
   return (
     <>
