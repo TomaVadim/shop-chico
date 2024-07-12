@@ -22,7 +22,7 @@ import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
 
 export const CheckoutForm = () => {
   const router = useRouter();
-  const { items: cart, clearCart } = useCartStore();
+  const { clearCart } = useCartStore();
 
   const { clearQuantity } = useCartQuantity();
 
@@ -34,7 +34,7 @@ export const CheckoutForm = () => {
   } = useValidateCheckoutFormData();
 
   const handleOnSubmit = async (data: CheckoutFormData) => {
-    const res = await sendOrder({ ...data, cart });
+    const res = await sendOrder(data);
 
     if (res.status !== 201) {
       return toast.error("Щось пішло не так", {
