@@ -17,9 +17,11 @@ export const CartCard = ({ product }: Props): JSX.Element => {
   const [dbproductQuantity, setDbproductQuantity] = useState<number>(1);
 
   useEffect(() => {
-    fetchProductById(product.id).then((res) =>
-      setDbproductQuantity(res.data.quantity)
-    );
+    fetchProductById(product.id).then((res) => {
+      if (res.data.quantity) {
+        setDbproductQuantity(res.data.quantity);
+      }
+    });
   }, []);
 
   const { increment, decrement } = useCartQuantity();
@@ -88,7 +90,7 @@ export const CartCard = ({ product }: Props): JSX.Element => {
             -
           </Button>
           <b className="border border-solid border-yellow-400 rounded-md px-4 text-lg">
-            {product.quantity}
+            {product.quantity || 0}
           </b>
 
           <Button

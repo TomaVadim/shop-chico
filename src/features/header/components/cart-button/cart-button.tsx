@@ -1,5 +1,6 @@
 "use client";
 import Link from "next/link";
+import { useEffect } from "react";
 
 import { IconButton } from "@mui/material";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -10,7 +11,6 @@ import {
   loadQuantityFromLocalStorage,
   useCartQuantity,
 } from "@/stores/zustand/use-cart-quantity";
-import { useEffect } from "react";
 
 export const CartButton = (): JSX.Element => {
   const { quantity, setQuantity } = useCartQuantity();

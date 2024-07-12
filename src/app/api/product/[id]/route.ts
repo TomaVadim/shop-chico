@@ -65,19 +65,19 @@ export const DELETE = async (
         { status: 400 }
       );
     }
-    const remainingProducts = await Product.find().sort({ id: 1 });
+    // const remainingProducts = await Product.find().sort({ id: 1 });
 
-    await Promise.all(
-      remainingProducts.map((product, index) => {
-        product.id = index + 1;
-        return product.save();
-      })
-    );
+    // await Promise.all(
+    //   remainingProducts.map((product, index) => {
+    //     product.id = index + 1;
+    //     return product.save();
+    //   })
+    // );
 
-    await Counter.findByIdAndUpdate(
-      { _id: "products" },
-      { sequence_value: remainingProducts.length }
-    );
+    // await Counter.findByIdAndUpdate(
+    //   { _id: "products" },
+    //   { sequence_value: remainingProducts.length }
+    // );
 
     return NextResponse.json({ data: deletedProduct }, { status: 200 });
   } catch (error) {
