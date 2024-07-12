@@ -1,25 +1,44 @@
 "use client";
-import Image from "next/image";
+
+import { useEffect, useState } from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { Box, Paper, Typography } from "@mui/material";
-import TaskAltIcon from "@mui/icons-material/TaskAlt";
+import { CircularProgress } from "@mui/material";
 
 import { ArrowNextSlide } from "@/assets/icons/home/our-new-products/arrow-next-slide";
 import { ArrowPrevSlide } from "@/assets/icons/home/our-new-products/arrow-prev-slide";
 import { SliderNavigationButton } from "@/features/home/components/slider-navigation-button/slider-navigation-button";
 import { OUR_NEW_PRODUCTS_BREAKPOINTS } from "@/features/home/configs/our-new-products-breakboints.config";
 import { NewProductCard } from "@/shared/interfaces/new-product-card";
+import { NewProductSwiperSlide } from "@/features/home/components/new-product-swiper-slide/new-product-swiper-slide";
+import { ProductData } from "@/features/products/schemas/product-data";
+import { fetchProducts } from "@/api/fetch-products";
 
 import "swiper/css";
 import "swiper/css/pagination";
 
-interface Props {
-  list: NewProductCard[];
-}
+export const OurNewProductsSlider = (): JSX.Element => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [products, setProducts] = useState<ProductData[]>([]);
 
-export const OurNewProductsSlider = ({ list }: Props): JSX.Element => {
+  useEffect(() => {
+    fetchProducts().then((data) => {
+      setProducts(data);
+      setIsLoading(false);
+    });
+  }, []);
+
+  const fiveLastProducts = products.slice(-5);
+
+  if (isLoading) {
+    return (
+      <div className="w-full py-2 h-[360px] flex justify-center items-center">
+        <CircularProgress />
+      </div>
+    );
+  }
+
   return (
     <div className="mt-10 md:mt-20 container flex flex-col gap-5 md:flex-row items-center">
       <SliderNavigationButton className="prev">
@@ -45,32 +64,13 @@ export const OurNewProductsSlider = ({ list }: Props): JSX.Element => {
           waitForTransition: true,
         }}
       >
-        {list.map(({ id, imageSrc, alt }) => (
+        {fiveLastProducts.map(({ id, imageUrl, description }) => (
           <SwiperSlide key={id} className="py-2">
-            <Box className="w-full flex justify-center items-center">
-              <Paper
-                className="relative top-0 left-0 w-[250px] h-[360px]"
-                sx={{ borderRadius: "6px" }}
-                elevation={3}
-              >
-                <div className="relative w-full h-full overflow-hidden rounded-md">
-                  <Image
-                    src={imageSrc}
-                    alt={alt}
-                    fill
-                    className="w-full h-full object-cover"
-                    sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 25vw"
-                  />
-                </div>
-                <Typography
-                  variant="h2"
-                  className="absolute flex text-blue-400 items-center font-bold top-0 right-0 p-2"
-                >
-                  <TaskAltIcon className="mr-1" />
-                  NEW
-                </Typography>
-              </Paper>
-            </Box>
+            <NewProductSwiperSlide
+              id={id}
+              imageSrc={imageUrl}
+              alt={description}
+            />
           </SwiperSlide>
         ))}
       </Swiper>
