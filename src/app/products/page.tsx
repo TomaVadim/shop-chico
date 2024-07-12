@@ -10,6 +10,8 @@ import { fetchProducts } from "@/api/fetch-products";
 export default async function Products() {
   const initialProducts = await fetchProducts();
 
+  const reversedProducts = initialProducts.reverse();
+
   return (
     <>
       <SectionWrapper className="py-5">
@@ -24,7 +26,7 @@ export default async function Products() {
         </Suspense>
       </SectionWrapper>
       <SectionWrapper className="py-5">
-        <ProductsList listOfProducts={initialProducts} />
+        <ProductsList listOfProducts={reversedProducts} />
       </SectionWrapper>
     </>
   );
