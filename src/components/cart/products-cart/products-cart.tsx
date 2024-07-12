@@ -1,17 +1,12 @@
 "use client";
 import { Box, Paper, Typography } from "@mui/material";
 import { CartCard } from "@/components/cart/cart-card/cart-card";
-import {
-  useCartStore,
-  useInitializeCart,
-} from "@/stores/zustand/use-cart-store";
+import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { useEffect } from "react";
 import { fetchProducts } from "@/api/fetch-products";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 
 export const ProductsCart = (): JSX.Element => {
-  useInitializeCart();
-
   const { items: products, removeItem } = useCartStore();
   const { decrement } = useCartQuantity();
 
