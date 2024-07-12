@@ -10,6 +10,7 @@ import { QUESTIONS_LIST } from "@/features/home/constants/questions-list";
 import { ShowMoreButton } from "@/features/components/show-more-button/show-more-button";
 import { Feedbacks } from "@/components/home/feedbacks/feedbacks";
 import { FEEDBACKS_LIST } from "@/features/home/constants/feedbacks-list";
+import { FloatingActionButton } from "@/features/components/floating-action-button/floating-action-button";
 
 export default function Home() {
   return (
@@ -64,6 +65,8 @@ export default function Home() {
 
         <Feedbacks list={FEEDBACKS_LIST} />
       </SectionWrapper>
+
+      <FloatingActionButton />
     </>
   );
 }
