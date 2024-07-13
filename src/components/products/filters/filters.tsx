@@ -6,14 +6,15 @@ import { useState } from "react";
 
 import {
   FormControl,
+  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
   Typography,
 } from "@mui/material";
 
-import { INSERT } from "@/shared/enums/filter/insert.filter";
-import { GENDER } from "@/shared/enums/filter/gender.filter";
+import { SEARCH_PARAMS_GENDER } from "@/shared/enums/filter/search-params-gender.filter";
+import { SEARCH_PARAMS_INSERT } from "@/shared/enums/filter/search-params-insert.filter";
 
 export const Filters = (): JSX.Element => {
   const router = useRouter();
@@ -48,31 +49,43 @@ export const Filters = (): JSX.Element => {
         Категорії:
       </Typography>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="gender-select-label" sx={{ color: "black" }}>
+          Стать:
+        </InputLabel>
         <Select
-          defaultValue={GENDER.UNISEX}
+          label="Стать:"
+          labelId="gender-select-label"
+          defaultValue={gender}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
           onChange={handleChangeGender}
         >
-          <MenuItem value={GENDER.UNISEX}>
+          <MenuItem value={SEARCH_PARAMS_GENDER.ALL}>
             <em>Всі чохли</em>
           </MenuItem>
-          <MenuItem value={GENDER.MALE}>Для хлопчика</MenuItem>
-          <MenuItem value={GENDER.FEMALE}>Для дівчинки</MenuItem>
+          <MenuItem value={SEARCH_PARAMS_GENDER.MALE}>Для хлопчика</MenuItem>
+          <MenuItem value={SEARCH_PARAMS_GENDER.FEMALE}>Для дівчинки</MenuItem>
+          <MenuItem value={SEARCH_PARAMS_GENDER.UNISEX}>Унісекс</MenuItem>
         </Select>
       </FormControl>
 
       <FormControl sx={{ m: 1, minWidth: 120 }}>
+        <InputLabel id="insert-select-label" sx={{ color: "black" }}>
+          Вкладиш:
+        </InputLabel>
         <Select
-          defaultValue={INSERT.WITHOUT}
+          labelId="insert-select-label"
+          label="Вкладиш:"
+          defaultValue={insert}
           displayEmpty
           inputProps={{ "aria-label": "Without label" }}
           onChange={handleChangeInsert}
         >
-          <MenuItem value={INSERT.WITHOUT}>
-            <em>Без вкладиша</em>
+          <MenuItem value={SEARCH_PARAMS_INSERT.ALL}>
+            <em>Всі чохли</em>
           </MenuItem>
-          <MenuItem value={INSERT.WITH}>З вкладишем</MenuItem>
+          <MenuItem value={SEARCH_PARAMS_INSERT.WITH}>З вкладишем</MenuItem>
+          <MenuItem value={SEARCH_PARAMS_INSERT.WITHOUT}>Без вкладишу</MenuItem>
         </Select>
       </FormControl>
     </div>

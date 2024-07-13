@@ -16,6 +16,13 @@ interface Props {
 export const CartCard = ({ product }: Props): JSX.Element => {
   const [dbproductQuantity, setDbproductQuantity] = useState<number>(1);
 
+  const maxDecriptionLength = 20;
+
+  const shortDescription =
+    product.description.length > maxDecriptionLength
+      ? product.description.slice(0, maxDecriptionLength) + "..."
+      : product.description;
+
   useEffect(() => {
     fetchProductById(product.id).then((res) => {
       if (res.data.quantity) {
@@ -47,7 +54,7 @@ export const CartCard = ({ product }: Props): JSX.Element => {
     >
       <Image
         src={product.imageUrl}
-        alt={product.description}
+        alt={shortDescription}
         width={100}
         height={100}
         className="mx-auto lg:mx-0 border border-solid border-yellow-400 rounded-md"
@@ -56,9 +63,9 @@ export const CartCard = ({ product }: Props): JSX.Element => {
         <Typography
           component="h3"
           variant="h4"
-          className="text-center lg:text-left mb-4"
+          className="mx-auto text-center lg:mx-0 lg:text-left mb-4"
         >
-          {product.description}
+          {shortDescription}
         </Typography>
         <div className="mt-4 lg:mt-0 flex flex-col gap-2">
           <Typography component="h3" variant="h4">

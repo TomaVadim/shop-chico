@@ -3,12 +3,12 @@ import { GENDER } from "@/shared/enums/filter/gender.filter";
 export const translateGender = (gender: string) => {
   switch (gender) {
     case GENDER.MALE:
-      return "Для хлопчика";
+      return "male";
     case GENDER.FEMALE:
-      return "Для дівчинки";
+      return "female";
     case GENDER.UNISEX:
-      return "Унісекс";
+      return "unisex";
     default:
-      return "Унісекс";
+      return "all";
   }
 };
