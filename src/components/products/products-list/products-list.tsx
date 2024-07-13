@@ -9,6 +9,7 @@ import { ProductData } from "@/features/products/schemas/product-data";
 import { Pagination } from "@/components/products/pagination/pagination";
 import { translateInsert } from "@/features/products/utils/translate-insert";
 import { translateGender } from "@/features/products/utils/translate-gender";
+import { fetchProducts } from "@/api/fetch-products";
 
 interface Props {
   listOfProducts: ProductData[];
@@ -50,6 +51,8 @@ export const ProductsList = ({ listOfProducts }: Props) => {
   }, [insert, gender, listOfProducts]);
 
   const handlePageChange = async (value: number) => {
+    const products = await fetchProducts(value);
+    setCurrentPageData(products);
     setPage(value);
   };
 
