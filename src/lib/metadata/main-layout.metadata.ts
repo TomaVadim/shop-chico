@@ -16,7 +16,7 @@ export const MAIN_LAYOUT_METADATA: Metadata = {
     },
   },
   openGraph: {
-    title: "Головна",
+    title: "Інтернет магазин чохлів для годування дітей",
     description: "Інтернет магазин чохлів для годування дітей",
     url: "https://chehlidetkam.vercel.app",
     type: "website",
@@ -24,7 +24,7 @@ export const MAIN_LAYOUT_METADATA: Metadata = {
     siteName: "chehlidetkam",
     images: [
       {
-        url: "/assets/images/home/baby.png",
+        url: "https://chehlidetkam.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fbaby.bfabbf0f.png&w=64&q=75",
         width: 150,
         height: 150,
         alt: "brand logo",
