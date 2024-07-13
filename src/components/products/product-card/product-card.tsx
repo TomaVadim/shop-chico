@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
 
 import { useSession } from "next-auth/react";
 import { Button, Grid, Paper, Typography } from "@mui/material";
@@ -12,7 +11,6 @@ import { PRIVATE_ROUTES } from "@/shared/enums/routes/private-routes";
 import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { ProductData } from "@/features/products/schemas/product-data";
-import { fetchProductById } from "@/api/fetch-product-by-id";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
 
 interface Props {
@@ -20,14 +18,6 @@ interface Props {
 }
 
 export const ProductCard = ({ product }: Props): JSX.Element => {
-  const [dbproductQuantity, setDbproductQuantity] = useState<number>(1);
-
-  useEffect(() => {
-    fetchProductById(product.id).then((res) =>
-      setDbproductQuantity(res.data.quantity)
-    );
-  }, []);
-
   const { data: session } = useSession();
   const { items, addItem } = useCartStore();
   const { increment } = useCartQuantity();
@@ -39,7 +29,7 @@ export const ProductCard = ({ product }: Props): JSX.Element => {
       (item) => item.imageUrl === product.imageUrl
     );
 
-    if (productInCart?.quantity === dbproductQuantity) return;
+    if (productInCart?.quantity === product.quantity) return;
 
     increment();
     addItem(product);
@@ -109,6 +99,7 @@ export const ProductCard = ({ product }: Props): JSX.Element => {
             </Button>
 
             <Link
+              rel="noopener nofollow noreferrer"
               href={`${PUBLIC_ROUTES.PRODUCTS}/${product.id}`}
               className="text-sm text-black"
             >
