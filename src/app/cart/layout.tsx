@@ -1,9 +1,15 @@
+import { Metadata } from "next";
+
 import { Container, Typography } from "@mui/material";
 
 import { ProductsCart } from "@/components/cart/products-cart/products-cart";
 import { SectionWrapper } from "@/features/components/section-wrapper/section-wrapper";
 import { ShowMoreButton } from "@/features/components/show-more-button/show-more-button";
 import { ButtonMoveToCheckout } from "@/components/cart/button-move-to-checkout/button-move-to-checkout";
+
+export const metadata: Metadata = {
+  title: "Кошик",
+};
 
 export default function CartLayout({
   children,

@@ -1,3 +1,5 @@
+import { Metadata } from "next";
+
 import { Suspense } from "react";
 
 import { CircularProgress } from "@mui/material";
@@ -7,10 +9,12 @@ import { ProductsList } from "@/components/products/products-list/products-list"
 import { SectionWrapper } from "@/features/components/section-wrapper/section-wrapper";
 import { fetchProducts } from "@/api/fetch-products";
 
+export const metadata: Metadata = {
+  title: "Каталог товарів",
+};
+
 export default async function Products() {
   const initialProducts = await fetchProducts();
-
-  const reversedProducts = initialProducts.reverse();
 
   return (
     <>
@@ -26,7 +30,7 @@ export default async function Products() {
         </Suspense>
       </SectionWrapper>
       <SectionWrapper className="py-5">
-        <ProductsList listOfProducts={reversedProducts} />
+        <ProductsList listOfProducts={initialProducts} />
       </SectionWrapper>
     </>
   );

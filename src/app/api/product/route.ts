@@ -19,8 +19,15 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     await connectToDB();
 
+    const existingProducts = await Product.find({}).sort({ createdAt: -1 });
+
     const newProduct = new Product(parsedBody.data);
     await newProduct.save();
+
+    existingProducts.unshift(newProduct);
+
+    await Product.deleteMany({});
+    await Product.insertMany(existingProducts);
 
     return NextResponse.json(
       { message: "Product created successfully", data: parsedBody.data },

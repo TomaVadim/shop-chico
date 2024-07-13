@@ -5,14 +5,14 @@ import { useSearchParams } from "next/navigation";
 import { Container, Grid, Typography } from "@mui/material";
 
 import { ProductCard } from "@/components/products/product-card/product-card";
-import { ProductData } from "@/features/products/schemas/product-data";
 import { Pagination } from "@/components/products/pagination/pagination";
 import { translateInsert } from "@/features/products/utils/translate-insert";
 import { translateGender } from "@/features/products/utils/translate-gender";
 import { fetchProducts } from "@/api/fetch-products";
+import { ExtendedProductData } from "@/features/products/shared/interfaces/extended-product-data";
 
 interface Props {
-  listOfProducts: ProductData[];
+  listOfProducts: ExtendedProductData[];
 }
 
 export const ProductsList = ({ listOfProducts }: Props) => {
@@ -36,15 +36,21 @@ export const ProductsList = ({ listOfProducts }: Props) => {
   }, [searchParams]);
 
   useEffect(() => {
-    const filteredData = listOfProducts.filter((product) => {
-      const translatedInsert = translateInsert(product.insert);
-      const translatedGender = translateGender(product.gender);
+    const filteredData = listOfProducts
+      .filter((product) => {
+        const translatedInsert = translateInsert(product.insert);
+        const translatedGender = translateGender(product.gender);
 
-      const insertMatch = insert === "all" || translatedInsert === insert;
-      const genderMatch = gender === "all" || translatedGender === gender;
+        const insertMatch = insert === "all" || translatedInsert === insert;
+        const genderMatch = gender === "all" || translatedGender === gender;
 
-      return insertMatch && genderMatch;
-    });
+        return insertMatch && genderMatch;
+      })
+      .sort((a, b) => {
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        );
+      });
 
     setTotalPages(Math.ceil((filteredData.length + 1) / 10));
     setCurrentPageData(filteredData);
