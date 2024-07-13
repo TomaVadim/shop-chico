@@ -1,14 +1,11 @@
-import {
-  ProductData,
-  productSchema,
-} from "@/features/products/schemas/product-data";
+import { ExtendedProductData } from "@/features/products/shared/interfaces/extended-product-data";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
 
 export const fetchProducts = async (
   page: number = 1,
   limit: number = 10
-): Promise<ProductData[] | []> => {
+): Promise<ExtendedProductData[] | []> => {
   try {
     const response = await fetch(
       `${BASE_URL}/api/product?page=${page}&limit=${limit}`,
@@ -18,14 +15,7 @@ export const fetchProducts = async (
     );
     const data = await response.json();
 
-    const parsedData = productSchema.array().safeParse(data);
-
-    if (!parsedData.success) {
-      console.error("Data validation failed", parsedData.error);
-      return [];
-    }
-
-    return parsedData.data;
+    return data;
   } catch (error) {
     console.error("Error fetching products:", error);
     return [];
