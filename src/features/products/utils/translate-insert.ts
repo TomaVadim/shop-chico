@@ -3,10 +3,10 @@ import { INSERT } from "@/shared/enums/filter/insert.filter";
 export const translateInsert = (insert: string) => {
   switch (insert) {
     case INSERT.WITHOUT:
-      return "Без вставки";
+      return "without";
     case INSERT.WITH:
-      return "З вставкою";
+      return "with";
     default:
-      return "Без вставки";
+      return "all";
   }
 };
