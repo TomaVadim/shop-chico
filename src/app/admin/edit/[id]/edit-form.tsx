@@ -13,8 +13,8 @@ import {
   Select,
   TextField,
 } from "@mui/material";
-
 import toast, { Toaster } from "react-hot-toast";
+import imageCompression from "browser-image-compression";
 
 import { deleteProductById } from "@/api/delete-product-by-id";
 import { useValidateProductFormData } from "@/features/admin/hooks/use-validate-product-form-data";
@@ -28,7 +28,6 @@ import { updateProductById } from "@/api/update-product-by-id";
 import { useToggleState } from "@/hooks/use-toggle-state";
 import { DeleteModal } from "@/components/admin/update/delete-modal/delete-modal";
 import { deleteImageFromUploadthingByKey } from "@/api/delete-image-from-uploadthing-by-key";
-import { ButtonChangeImageSize } from "@/features/components/button-change-image-size/button-change-image-size";
 
 interface Props {
   data: ProductData;
@@ -123,12 +122,19 @@ export const EditForm = ({ data }: Props): JSX.Element => {
           )}
         </Paper>
 
-        <ButtonChangeImageSize className="mb-5">
-          Змінити розмір фото
-        </ButtonChangeImageSize>
-
         <UploadButton
           endpoint="imageUploader"
+          onBeforeUploadBegin={async (file) => {
+            const compressedFiles = file.map(async (f) => {
+              return await imageCompression(f, {
+                maxSizeMB: 0.2,
+                maxWidthOrHeight: 800,
+                useWebWorker: true,
+              });
+            });
+
+            return await Promise.all(compressedFiles);
+          }}
           onClientUploadComplete={(res) => {
             const url = res[0].url;
 
