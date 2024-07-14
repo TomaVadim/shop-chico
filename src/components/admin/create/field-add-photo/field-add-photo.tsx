@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 import { UploadButton } from "@/server/utils/uploadthing";
 import { ProductFormFieldProps } from "@/features/admin/shared/interfaces/product-form-field-props";
+import { ButtonChangeImageSize } from "@/features/components/button-change-image-size/button-change-image-size";
 
 interface Props extends ProductFormFieldProps {
   handleLoadFile: (url: string, key: string) => void;
@@ -35,6 +36,10 @@ export const FieldAddPhoto = ({
         )}
       </Paper>
 
+      <ButtonChangeImageSize className="mb-5">
+        Змінити розмір фото
+      </ButtonChangeImageSize>
+
       <UploadButton
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
@@ -50,11 +55,15 @@ export const FieldAddPhoto = ({
           });
         }}
         onUploadError={(error: Error) => {
-          console.log(error);
-
-          toast.error("Фото не завантажено", {
-            id: "load-image",
-          });
+          if (error.cause) {
+            toast.error("Фото занадто велике", {
+              id: "load-image",
+            });
+          } else {
+            toast.error("Фото не завантажено", {
+              id: "load-image",
+            });
+          }
         }}
       />
       <input
@@ -62,7 +71,6 @@ export const FieldAddPhoto = ({
         className="opacity-0 w-0 h-0"
         {...register(name)}
         readOnly
-        // value={fileUrl || ""}
       />
 
       {errors[name] && <p className="text-red-500">{errors[name]?.message}</p>}

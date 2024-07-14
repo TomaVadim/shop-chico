@@ -28,6 +28,7 @@ import { updateProductById } from "@/api/update-product-by-id";
 import { useToggleState } from "@/hooks/use-toggle-state";
 import { DeleteModal } from "@/components/admin/update/delete-modal/delete-modal";
 import { deleteImageFromUploadthingByKey } from "@/api/delete-image-from-uploadthing-by-key";
+import { ButtonChangeImageSize } from "@/features/components/button-change-image-size/button-change-image-size";
 
 interface Props {
   data: ProductData;
@@ -122,6 +123,10 @@ export const EditForm = ({ data }: Props): JSX.Element => {
           )}
         </Paper>
 
+        <ButtonChangeImageSize className="mb-5">
+          Змінити розмір фото
+        </ButtonChangeImageSize>
+
         <UploadButton
           endpoint="imageUploader"
           onClientUploadComplete={(res) => {
@@ -136,11 +141,15 @@ export const EditForm = ({ data }: Props): JSX.Element => {
             });
           }}
           onUploadError={(error: Error) => {
-            console.log(error);
-
-            toast.error("Фото не завантажено", {
-              id: "update-image",
-            });
+            if (error.cause) {
+              toast.error("Фото занадто велике", {
+                id: "load-image",
+              });
+            } else {
+              toast.error("Фото не завантажено", {
+                id: "load-image",
+              });
+            }
           }}
         />
         <input

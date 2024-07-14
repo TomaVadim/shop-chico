@@ -49,18 +49,12 @@ export const FormCreateNewProduct = (): JSX.Element => {
 
       toast.success("Товар додано", {
         position: "top-center",
-        icon: "😃",
-        id: "create-product",
-        style: { background: "green", color: "white" },
       });
 
       reset();
     } catch (error) {
       toast.error("Щось пішло не так", {
         position: "top-center",
-        icon: "😱",
-        id: "create-product",
-        style: { background: "red", color: "white" },
       });
     }
   };

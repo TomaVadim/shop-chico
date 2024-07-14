@@ -30,6 +30,7 @@ export const NewProductSwiperSlide = ({
             src={imageSrc}
             alt={alt}
             fill
+            priority
             className="w-full h-full object-cover"
             sizes="(max-width: 600px) 100vw, (max-width: 960px) 50vw, 25vw"
           />
