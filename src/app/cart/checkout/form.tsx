@@ -5,6 +5,11 @@ import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import {
   Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   FormControl,
   MenuItem,
   Select,
@@ -19,12 +24,20 @@ import { PAYMENT_METHOD } from "@/features/cart/shared/enums/payment-method";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
+import { useState } from "react";
 
 export const CheckoutForm = () => {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
   const { clearCart } = useCartStore();
 
   const { clearQuantity } = useCartQuantity();
+
+  const handleClose = () => {
+    setOpen(false);
+
+    router.push(PUBLIC_ROUTES.HOME);
+  };
 
   const {
     formState: { errors },
@@ -54,7 +67,7 @@ export const CheckoutForm = () => {
 
     reset();
 
-    router.push(PUBLIC_ROUTES.HOME);
+    setOpen(true);
   };
 
   return (
@@ -62,6 +75,20 @@ export const CheckoutForm = () => {
       onSubmit={handleSubmit(handleOnSubmit)}
       className="flex flex-col gap-5"
     >
+      <Dialog open={open}>
+        <DialogTitle>Ваше замовлення було відправлено</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Найближчим часом ми з Вами зв'яжемося
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button variant="contained" onClick={handleClose}>
+            Закрити
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       <Toaster toastOptions={{ id: "make-order" }} />
 
       <TextField

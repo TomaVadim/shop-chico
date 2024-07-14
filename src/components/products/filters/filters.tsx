@@ -46,7 +46,7 @@ export const Filters = (): JSX.Element => {
   return (
     <div className="flex justify-center items-center gap-5">
       <Typography variant="h2" className="hidden md:block">
-        Категорії:
+        Фільтри:
       </Typography>
       <FormControl sx={{ m: 1, minWidth: 120 }}>
         <InputLabel id="gender-select-label" sx={{ color: "black" }}>

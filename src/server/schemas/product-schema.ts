@@ -10,7 +10,7 @@ export const ProductSchema = new Schema({
 
   insert: {
     type: String,
-    enum: ["З вставкою", "Без вставки"],
+    enum: ["З вкладишем", "Без вкладишу"],
     required: true,
   },
 

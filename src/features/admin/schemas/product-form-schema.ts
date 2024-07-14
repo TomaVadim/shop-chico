@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const productFormSchema = z.object({
-  insert: z.enum(["З вставкою", "Без вставки"]),
+  insert: z.enum(["З вкладишем", "Без вкладишу"]),
   gender: z.enum(["Для хлопчика", "Для дівчинки", "Унісекс"]),
   imageUrl: z.string().url("Додайте фото"),
   fileKey: z.string().min(1, "Додайте фото"),

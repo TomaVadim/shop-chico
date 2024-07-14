@@ -10,7 +10,6 @@ import { ArrowNextSlide } from "@/assets/icons/home/our-new-products/arrow-next-
 import { ArrowPrevSlide } from "@/assets/icons/home/our-new-products/arrow-prev-slide";
 import { SliderNavigationButton } from "@/features/home/components/slider-navigation-button/slider-navigation-button";
 import { OUR_NEW_PRODUCTS_BREAKPOINTS } from "@/features/home/configs/our-new-products-breakboints.config";
-import { NewProductCard } from "@/shared/interfaces/new-product-card";
 import { NewProductSwiperSlide } from "@/features/home/components/new-product-swiper-slide/new-product-swiper-slide";
 import { ProductData } from "@/features/products/schemas/product-data";
 import { fetchProducts } from "@/api/fetch-products";
@@ -29,7 +28,7 @@ export const OurNewProductsSlider = (): JSX.Element => {
     });
   }, []);
 
-  const fiveLastProducts = products.slice(-5);
+  const fiveLastProducts = products.slice(0, 5);
 
   if (isLoading) {
     return (
