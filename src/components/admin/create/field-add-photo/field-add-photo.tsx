@@ -3,10 +3,10 @@ import Image from "next/image";
 
 import { Paper } from "@mui/material";
 import toast, { Toaster } from "react-hot-toast";
+import imageCompression from "browser-image-compression";
 
 import { UploadButton } from "@/server/utils/uploadthing";
 import { ProductFormFieldProps } from "@/features/admin/shared/interfaces/product-form-field-props";
-import { ButtonChangeImageSize } from "@/features/components/button-change-image-size/button-change-image-size";
 
 interface Props extends ProductFormFieldProps {
   handleLoadFile: (url: string, key: string) => void;
@@ -36,12 +36,19 @@ export const FieldAddPhoto = ({
         )}
       </Paper>
 
-      <ButtonChangeImageSize className="mb-5">
-        Змінити розмір фото
-      </ButtonChangeImageSize>
-
       <UploadButton
         endpoint="imageUploader"
+        onBeforeUploadBegin={async (file) => {
+          const compressedFiles = file.map(async (f) => {
+            return await imageCompression(f, {
+              maxSizeMB: 0.2,
+              maxWidthOrHeight: 800,
+              useWebWorker: true,
+            });
+          });
+
+          return await Promise.all(compressedFiles);
+        }}
         onClientUploadComplete={(res) => {
           const url = res[0].url;
           const key = res[0].key;
