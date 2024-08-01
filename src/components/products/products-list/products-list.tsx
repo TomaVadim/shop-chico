@@ -10,6 +10,7 @@ import { translateInsert } from "@/features/products/utils/translate-insert";
 import { translateGender } from "@/features/products/utils/translate-gender";
 import { fetchProducts } from "@/api/fetch-products";
 import { ExtendedProductData } from "@/features/products/shared/interfaces/extended-product-data";
+import { fetchAllProducts } from "@/api/fetch-all-products";
 
 interface Props {
   listOfProducts: ExtendedProductData[];
@@ -29,6 +30,16 @@ export const ProductsList = ({ listOfProducts }: Props) => {
   const [gender, setGender] = useState<string>(
     searchParams.get("gender") || ""
   );
+
+  useEffect(() => {
+    const getAllProducts = async () => {
+      const products = await fetchAllProducts();
+
+      setTotalPages(Math.ceil((products.length + 1) / 10));
+    };
+
+    getAllProducts();
+  });
 
   useEffect(() => {
     setInsert(searchParams.get("insert") || "");
