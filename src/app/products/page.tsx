@@ -14,8 +14,6 @@ export const metadata: Metadata = {
 };
 
 export default async function Products() {
-  const initialProducts = await fetchProducts();
-
   return (
     <>
       <SectionWrapper className="py-5">
@@ -30,7 +28,7 @@ export default async function Products() {
         </Suspense>
       </SectionWrapper>
       <SectionWrapper className="py-5">
-        <ProductsList listOfProducts={initialProducts} />
+        <ProductsList />
       </SectionWrapper>
     </>
   );
