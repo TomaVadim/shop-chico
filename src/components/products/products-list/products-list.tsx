@@ -26,19 +26,20 @@ export const ProductsList = () => {
   const insert = searchParams.get("insert") || "";
   const gender = searchParams.get("gender") || "";
 
+  console.log("currentPageData", currentPageData);
+
   const fetchProductsData = async () => {
     const products = await fetchAllProducts();
+    console.log("allproducts", products);
     setAllProducts(products);
   };
 
-  // Fetch all products on mount and periodically check for updates
+  // Fetch products when component mounts
   useEffect(() => {
     fetchProductsData();
-    const interval = setInterval(fetchProductsData, 60000); // Poll every 60 seconds
-    return () => clearInterval(interval); // Clear interval on component unmount
   }, []);
 
-  // Update filtered products when insert or gender changes
+  // Update filtered products when insert or gender changes or allProducts changes
   useEffect(() => {
     const filteredData = allProducts
       .filter((product) => {
@@ -55,10 +56,9 @@ export const ProductsList = () => {
 
     setFilteredProducts(filteredData);
     setTotalPages(Math.ceil(filteredData.length / 10));
-    setPage(1); // Reset to first page on filter change
+    setPage(1);
   }, [insert, gender, allProducts]);
 
-  // Update current page data when page or filtered products change
   useEffect(() => {
     const startIndex = (page - 1) * 10;
     const endIndex = startIndex + 10;
