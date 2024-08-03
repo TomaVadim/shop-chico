@@ -26,13 +26,16 @@ export const ProductsList = () => {
   const insert = searchParams.get("insert") || "";
   const gender = searchParams.get("gender") || "";
 
-  // Fetch all products on mount
+  const fetchProductsData = async () => {
+    const products = await fetchAllProducts();
+    setAllProducts(products);
+  };
+
+  // Fetch all products on mount and periodically check for updates
   useEffect(() => {
-    const getAllProducts = async () => {
-      const products = await fetchAllProducts();
-      setAllProducts(products);
-    };
-    getAllProducts();
+    fetchProductsData();
+    const interval = setInterval(fetchProductsData, 60000); // Poll every 60 seconds
+    return () => clearInterval(interval); // Clear interval on component unmount
   }, []);
 
   // Update filtered products when insert or gender changes
