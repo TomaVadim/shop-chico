@@ -15,6 +15,8 @@ export const Pagination = ({ count, page, onChange }: Props): JSX.Element => {
         className="flex justify-center"
         count={count}
         page={page}
+        siblingCount={0}
+        size="medium"
         color="primary"
         onChange={(event, value) => onChange(value)}
       />
