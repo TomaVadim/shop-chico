@@ -28,18 +28,11 @@ export const ProductsList = () => {
 
   console.log("currentPageData", currentPageData);
 
-  const fetchProductsData = async () => {
-    const products = await fetchAllProducts();
-    console.log("allproducts", products);
-    setAllProducts(products);
-  };
-
-  // Fetch products when component mounts
   useEffect(() => {
-    fetchProductsData();
+    console.log("fetched fresh products", allProducts);
+    fetchAllProducts().then((products) => setAllProducts(products));
   }, []);
 
-  // Update filtered products when insert or gender changes or allProducts changes
   useEffect(() => {
     const filteredData = allProducts
       .filter((product) => {
