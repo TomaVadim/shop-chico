@@ -2,6 +2,8 @@ import { Product } from "@/server/schemas/product-schema";
 import { connectToDB } from "@/server/utils/connect-to-db";
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export const GET = async (req: NextRequest): Promise<NextResponse> => {
   try {
     await connectToDB();
