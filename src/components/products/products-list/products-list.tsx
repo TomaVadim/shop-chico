@@ -30,7 +30,10 @@ export const ProductsList = () => {
 
   useEffect(() => {
     console.log("fetched fresh products", allProducts);
-    fetchAllProducts().then((products) => setAllProducts(products));
+    fetchAllProducts().then((products) => {
+      console.log("fetched fresh products", products);
+      setAllProducts(products);
+    });
   }, []);
 
   useEffect(() => {
