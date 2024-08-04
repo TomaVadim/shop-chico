@@ -1,4 +1,4 @@
-import { Metadata } from "next";
+"use client";
 
 import { Suspense } from "react";
 
@@ -7,10 +7,6 @@ import { CircularProgress } from "@mui/material";
 import { Filters } from "@/components/products/filters/filters";
 import { ProductsList } from "@/components/products/products-list/products-list";
 import { SectionWrapper } from "@/features/components/section-wrapper/section-wrapper";
-
-export const metadata: Metadata = {
-  title: "Каталог товарів",
-};
 
 export default function Products() {
   return (
