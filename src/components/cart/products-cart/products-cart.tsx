@@ -14,8 +14,13 @@ export const ProductsCart = (): JSX.Element => {
     fetchProducts().then((data) => {
       const currentProductIds = new Set(data.map((product) => product.id));
 
+      // Separate cart items from the product list if needed
+      const cartProductIds = new Set(products.map((product) => product.id)); // Assuming you have a `cart` state
+
+      // Filter products that are no longer in the fetched data but are not in the cart
       const productsToRemove = products.filter(
-        (product) => !currentProductIds.has(product.id)
+        (product) =>
+          !currentProductIds.has(product.id) && !cartProductIds.has(product.id)
       );
 
       productsToRemove.forEach((product) => {
@@ -29,6 +34,8 @@ export const ProductsCart = (): JSX.Element => {
     (acc, product) => acc + product.price * product.quantity,
     0
   );
+
+  console.log("products", products);
 
   if (!products.length) {
     return (
@@ -45,7 +52,8 @@ export const ProductsCart = (): JSX.Element => {
           Загальна вартість:
         </Typography>
         <Typography className="font-bold text-sm lg:text-lg">
-          {fullPrice} <span className="text-sm lg:text-lg">грн.</span>
+          {fullPrice} <span className="text-sm lg:text-lg">грн.</span>0{" "}
+          <span className="text-sm lg:text-lg">грн.</span>
         </Typography>
       </Paper>
       {products.map((product) => (
