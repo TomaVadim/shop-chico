@@ -1,6 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import toast, { Toaster } from "react-hot-toast";
 import {
@@ -24,7 +25,7 @@ import { PAYMENT_METHOD } from "@/features/cart/shared/enums/payment-method";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
-import { useState } from "react";
+import { sendMessageToTelegramBot } from "@/api/send-message-to-telegram-bot";
 
 export const CheckoutForm = () => {
   const [open, setOpen] = useState(false);
@@ -55,6 +56,8 @@ export const CheckoutForm = () => {
         id: "make-order",
       });
     }
+
+    sendMessageToTelegramBot();
 
     toast.success("Замовлення відправлено", {
       position: "top-center",
