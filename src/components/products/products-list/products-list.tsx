@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { Container, Grid, Typography } from "@mui/material";
+import { CircularProgress, Container, Grid } from "@mui/material";
 
 import { ProductCard } from "@/components/products/product-card/product-card";
 import { Pagination } from "@/components/products/pagination/pagination";
@@ -26,12 +26,8 @@ export const ProductsList = () => {
   const insert = searchParams.get("insert") || "";
   const gender = searchParams.get("gender") || "";
 
-  console.log("currentPageData", currentPageData);
-
   useEffect(() => {
-    console.log("fetched fresh products", allProducts);
     fetchAllProducts().then((products) => {
-      console.log("fetched fresh products", products);
       setAllProducts(products);
     });
   }, []);
@@ -67,9 +63,9 @@ export const ProductsList = () => {
 
   if (!currentPageData.length) {
     return (
-      <Typography variant="h5" textAlign="center">
-        Нічого не знайдено
-      </Typography>
+      <div className="h-[calc(100vh-184px)] w-full flex justify-center items-center">
+        <CircularProgress />
+      </div>
     );
   }
 
