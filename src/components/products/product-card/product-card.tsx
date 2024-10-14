@@ -12,6 +12,7 @@ import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { ProductData } from "@/features/products/schemas/product-data";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
+import { addToCart } from "@/lib/google-analytics/events/add-to-cart.event";
 
 interface Props {
   product: ProductData;
@@ -33,6 +34,7 @@ export const ProductCard = ({ product }: Props): JSX.Element => {
 
     increment();
     addItem(product);
+    addToCart(product.id);
   };
 
   return (
