@@ -26,6 +26,7 @@ import { useCartQuantity } from "@/stores/zustand/use-cart-quantity";
 import { useCartStore } from "@/stores/zustand/use-cart-store";
 import { PUBLIC_ROUTES } from "@/shared/enums/routes/public-routes";
 import { sendMessageToTelegramBot } from "@/api/send-message-to-telegram-bot";
+import { placeOrder } from "@/lib/google-analytics/events/place-order.event";
 
 export const CheckoutForm = () => {
   const [open, setOpen] = useState(false);
@@ -48,6 +49,12 @@ export const CheckoutForm = () => {
   } = useValidateCheckoutFormData();
 
   const handleOnSubmit = async (data: CheckoutFormData) => {
+    const { cart } = data;
+    const fullPrice = cart.reduce(
+      (acc, product) => acc + product.price * product.quantity,
+      0
+    );
+
     const res = await sendOrder(data);
 
     if (res.status !== 201) {
@@ -57,6 +64,7 @@ export const CheckoutForm = () => {
       });
     }
 
+    placeOrder(fullPrice);
     sendMessageToTelegramBot();
 
     toast.success("Замовлення відправлено", {
