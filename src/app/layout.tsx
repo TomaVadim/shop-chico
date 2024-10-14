@@ -10,6 +10,7 @@ import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 import { ModalCookieUsage } from "@/features/components/modal-cookie-usage/modal-cookie-usage";
 import { MAIN_LAYOUT_METADATA } from "@/lib/metadata/main-layout.metadata";
+import GoogleAnalytics from "@/features/components/google-analytics/google-analytics";
 
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="uk" id="__next">
       <AppProvider>
+        <GoogleAnalytics />
         <body
           className={`${montserrat.variable} ${roboto.variable} font-montserrat h-full pt-[72px] flex flex-col`}
         >
