@@ -1,4 +1,4 @@
-import { event } from "./event";
+import { event } from "../event";
 
 export const addToCart = (id?: number) => {
   event({

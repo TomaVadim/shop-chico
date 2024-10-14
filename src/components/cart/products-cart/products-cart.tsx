@@ -35,8 +35,6 @@ export const ProductsCart = (): JSX.Element => {
     0
   );
 
-  console.log("products", products);
-
   if (!products.length) {
     return (
       <Typography variant="h5" textAlign="center">
